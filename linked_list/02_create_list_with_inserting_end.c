@@ -14,7 +14,7 @@ typedef struct node* node;
 
 // Function declarations
 node createNode();
-node insertBeg(node head);
+node insertEnd(node head, int i);
 node createList();
 node printList(node p);
 
