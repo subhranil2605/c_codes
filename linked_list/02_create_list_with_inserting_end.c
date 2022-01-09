@@ -1,6 +1,6 @@
 /*
 Subhranil Sarkar
-Creating List with the function Insert at the beginning
+Creating List with the function Insert at the end
 */
 
 #include<stdio.h>
