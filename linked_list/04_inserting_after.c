@@ -16,7 +16,7 @@ node createNode();
 node insertBeg(node head);
 node createList();
 node printList(node p);
-node insertAny(node head);
+node insertAfter(node head);
 node createNodeWithValue();
 
 // main function
@@ -25,7 +25,7 @@ void main() {
     list = createList();
     printList(list);
 
-    list = insertAny(list);
+    list = insertAfter(list);
     printList(list);
 }
 
@@ -92,34 +92,33 @@ node createList() {
 
 
 // insert after
-node insertAny(node head) {
+node insertAfter(node head) {
     int choice, i, value;
-    node ptr, preptr, newNode;
+    node ptr, newNode;
 
     printf("\nYour current list is : \n");
     printList(head);
 
-    printf("\nEnter the position where you want to insert the new value (starting from 0):: ");
+    printf("\nEnter the position after which you want to insert the new node (starting from 0):: ");
     scanf("%d", &choice);
 
     newNode = createNodeWithValue();
 
     if (choice == 0) {
         // inserting at the beginning
-        newNode -> next = head;
-        head = newNode;
+        newNode -> next = head -> next;
+        head -> next = newNode;
     } else {
         ptr = head;
         for (i = 0; i < choice; i++) {
-            preptr = ptr;
             ptr = ptr -> next;
             if (ptr == NULL) {
                 printf("\nIndex out of range!\nReturning the current list:\n");
                 return head;
             }
         }
-        preptr -> next = newNode;       // previous node's next node is the new node
-        newNode -> next = ptr;          // new node's next is the node that sit on the desired position
+        newNode -> next = ptr -> next;
+        ptr -> next = newNode;
     }
     return head;
     
