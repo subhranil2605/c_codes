@@ -18,11 +18,15 @@ node insertBeg(node head);
 node createList();
 node printList(node p);
 node insertAfter(node head);
+node createNodeWithValue();
 
 // main function
 void main() {
     node list;
     list = createList();
+    printList(list);
+
+    list = insertAfter(list);
     printList(list);
 }
 
@@ -90,7 +94,52 @@ node createList() {
 
 // insert after
 node insertAfter(node head) {
-    node p, q;
+    int choice, i, value;
+    node ptr, preptr, newNode;
 
-    printf("Enter the element")
+    printf("\nYour current list is : \n");
+    printList(head);
+
+    printf("\nEnter the position where you want to insert the new value (starting from 0):: ");
+    scanf("%d", &choice);
+
+    newNode = createNodeWithValue();
+
+    if (choice == 0) {
+        // inserting at the beginning
+        newNode -> next = head;
+        head = newNode;
+    } else {
+        ptr = head;
+        for (i = 0; i < choice; i++) {
+            preptr = ptr;
+            ptr = ptr -> next;
+            if (ptr == NULL) {
+                printf("\nIndex out of range!\nReturning the current list:\n");
+                return head;
+            }
+        }
+        preptr -> next = newNode;
+        newNode -> next = ptr;
+    }
+    return head;
+    
+}
+
+
+node createNodeWithValue() {
+    node newNode;
+    int value;
+    
+    newNode = createNode();
+
+    if (newNode == NULL) {
+        printf("\nCould not create a new node!\n");
+        return 0;
+    }
+
+    printf("\nEnter the new data:: ");
+    scanf("%d", &value);
+    newNode -> data = value;
+    return newNode;
 }
