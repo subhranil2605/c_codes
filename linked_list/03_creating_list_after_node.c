@@ -17,6 +17,7 @@ node createNode();
 node insertBeg(node head);
 node createList();
 node printList(node p);
+node insertAfter(node head);
 
 // main function
 void main() {
@@ -83,4 +84,13 @@ node createList() {
         scanf("\n%c", &ch);
     }
     return head;
+}
+
+
+
+// insert after
+node insertAfter(node head) {
+    node p, q;
+
+    printf("Enter the element")
 }
