@@ -15,7 +15,7 @@ typedef struct node* node;
 // Menus
 node createMenu(node list);
 node insertMenu(node list);
-void insertAnyMenu();
+node insertAnyMenu(node list);
 
 // node functions
 node createNode();
@@ -24,6 +24,10 @@ node insertEnd(node head);
 node createListBeg();
 node createListEnd();
 node printList(node p);
+node insertAfter(node head);
+node insertBefore(node head);
+node insertAny(node head);
+node createNodeWithValue();
 
 
 // main function
@@ -127,7 +131,7 @@ node insertMenu(node list) {
             break;
         case 3:
             printf("\nInserting any position...\n");
-            insertAnyMenu();
+            list = insertAnyMenu(list);
             break;
         default:
             printf("Incorrect choice");
@@ -139,7 +143,7 @@ node insertMenu(node list) {
     return list;
 }
 
-void insertAnyMenu() {
+node insertAnyMenu(node list) {
     int choice;
 
     printf("\nPress 1: Insert After a Node: 1\n");
@@ -150,13 +154,16 @@ void insertAnyMenu() {
 
     switch (choice) {
         case 1:
-            printf("Inserting After\n");
+            printf("Inserting After...\n");
+            list = insertAfter(list);
             break;
         case 2:
-            printf("Inserting Before\n");
+            printf("Inserting Before...\n");
+            list = insertBefore(list);
             break;
         case 3:
-            printf("Inserting Any\n");
+            printf("Inserting at any position...\n");
+            list = insertAny(list);
             break;
         default:
             printf("Incorrect choice");
@@ -264,4 +271,126 @@ node createListEnd() {
         scanf("\n%c", &ch);
     }
     return head;
+}
+
+
+// insert after
+node insertAfter(node head) {
+    int choice, i, value;
+    node ptr, newNode;
+
+    printf("\nYour current list is : \n");
+    printList(head);
+
+    printf("\nEnter the position after which you want to insert the new node (starting from 0):: ");
+    scanf("%d", &choice);
+
+    newNode = createNodeWithValue();
+
+    if (choice == 0) {
+        // inserting at the beginning
+        newNode -> next = head -> next;
+        head -> next = newNode;
+    } else {
+        ptr = head;
+        for (i = 0; i < choice; i++) {
+            ptr = ptr -> next;
+            if (ptr == NULL) {
+                printf("\nIndex out of range!\nReturning the current list:\n");
+                return head;
+            }
+        }
+        newNode -> next = ptr -> next;
+        ptr -> next = newNode;
+    }
+    return head;
+    
+}
+
+
+// insert before
+node insertBefore(node head) {
+    int choice, i, value;
+    node ptr, preptr, newNode;
+
+    printf("\nYour current list is : \n");
+    printList(head);
+
+    printf("\nEnter the position before which you want to insert the new node (starting from 0):: ");
+    scanf("%d", &choice);
+
+    newNode = createNodeWithValue();
+
+    if (choice == 0) {
+        // inserting at the beginning
+        newNode -> next = head;
+        head  = newNode;
+    } else {
+        ptr = head;
+        for (i = 0; i < choice; i++) {
+            preptr = ptr;
+            ptr = ptr -> next;
+            if (ptr == NULL) {
+                printf("\nIndex out of range!\nReturning the current list:\n");
+                return head;
+            }
+        }
+        preptr -> next = newNode;
+        newNode -> next = ptr;
+    }
+    return head;
+    
+}
+
+
+// insert any
+node insertAny(node head) {
+    int choice, i, value;
+    node ptr, preptr, newNode;
+
+    printf("\nYour current list is : \n");
+    printList(head);
+
+    printf("\nEnter the position where you want to insert the new value (starting from 0):: ");
+    scanf("%d", &choice);
+
+    newNode = createNodeWithValue();
+
+    if (choice == 0) {
+        // inserting at the beginning
+        newNode -> next = head;
+        head = newNode;
+    } else {
+        ptr = head;
+        for (i = 0; i < choice; i++) {
+            preptr = ptr;
+            ptr = ptr -> next;
+            if (ptr == NULL) {
+                printf("\nIndex out of range!\nReturning the current list:\n");
+                return head;
+            }
+        }
+        preptr -> next = newNode;       // previous node's next node is the new node
+        newNode -> next = ptr;          // new node's next is the node that sit on the desired position
+    }
+    return head;
+    
+}
+
+
+node createNodeWithValue() {
+    node newNode;
+    int value;
+    
+    newNode = createNode();
+
+    if (newNode == NULL) {
+        printf("\nCould not create a new node!\n");
+        return 0;
+    }
+
+    printf("\nEnter the new data:: ");
+    scanf("%d", &value);
+    newNode -> data = value;
+    return newNode;
 }

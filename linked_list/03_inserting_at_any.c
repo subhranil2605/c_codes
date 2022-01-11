@@ -91,7 +91,7 @@ node createList() {
 
 
 
-// insert after
+// insert any
 node insertAny(node head) {
     int choice, i, value;
     node ptr, preptr, newNode;
