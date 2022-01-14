@@ -37,8 +37,9 @@ node sortDesc(node head);
 void swap(int* a, int* b);
 
 
-
-// --------------------------------------------------------------------
+/* -------------------------------------------------------------------- */
+/* --------------------------- Menu Funtions ----------------------------------------- */
+/* -------------------------------------------------------------------- */
 
 // function definitions
 
@@ -63,7 +64,7 @@ node createMenu(node list) {
             printf("\nIncorrect choice!\n");
             break;
     }
-    printf("\nSuccessfully Created a list. The list is :\n");
+    printf("\nSuccessfully Created a list.\nThe list is: \n");
     printList(list);
     return list;
 }
@@ -194,8 +195,11 @@ node sortingMenu(node list) {
     }
     return list;
 }
+/* -------------------------------------------------------------------- */
+/* ----------------- End of Menus --------------------------   */
+/* -------------------------------------------------------------------- */
 
-// --------------------------------------------------
+
 
 // displaying the whole list
 node printList(node p) {
@@ -570,20 +574,20 @@ void swap(int* a, int* b) {
 }
 
 
-// main function
+/* ----------------------Main Function-------------------------*/
 void main() {
     int choice;
     node list = NULL;
 
     while (1) {
-        printf("\n====================================================\n");
+        printf("\n<====================================================>\n");
         printf("Press 1: Create a List\n");
         printf("Press 2: Display List\n");
         printf("Press 3: Insert an Element\n");
         printf("Press 4: Delete an Element\n");
         printf("Press 5: Sorting the List\n");
         printf("Press 6: Exit");
-        printf("\n====================================================\n");
+        printf("\n<====================================================>\n");
         printf("Enter your choice:: ");
         scanf("%d", &choice);
 
