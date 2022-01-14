@@ -89,17 +89,20 @@ node createList() {
 
 // reversing
 node reverse(node head) {
-    node ptr, preptr;
-    node temp = NULL;
+    node preptr = NULL, ptr, temp = NULL;
 
-    ptr = head;
-    while (ptr != NULL) {
-        preptr = ptr;
-        ptr = ptr -> next;
-        
-        ptr -> next = preptr;
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    } else{
+        ptr = head;
+        while (ptr != NULL) {
+            temp = ptr -> next;
+            ptr -> next = preptr;
+            preptr = ptr;
+            ptr = temp;
+        }
+        return preptr;
     }
-    return head;
 }
 
 
