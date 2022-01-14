@@ -36,6 +36,7 @@ node sortAsc(node head);
 node sortDesc(node head);
 void swap(int* a, int* b);
 node concat(node a);
+node reverse(node head);
 
 
 /* -------------------------------------------------------------------- */
@@ -49,7 +50,7 @@ node createMenu(node list) {
 
     printf("\nPress 1: Insert from the Beginning\n");
     printf("Press 2: Insert from the End\n");
-    printf("\nEnter your choice to create a list:: ");
+    printf("\nEnter your choice to create a list >> ");
     scanf("%d", &choice);
 
     switch (choice) {
@@ -77,7 +78,7 @@ node insertMenu(node list) {
     printf("\nPress 1: Insert at the Beginning\n");
     printf("Press 2: Insert at the End\n");
     printf("Press 3: Insert at any position\n");
-    printf("\nEnter your choice to create a list:: ");
+    printf("\nEnter your choice to create a list >> ");
     scanf("%d", &choice);
 
     switch (choice) {
@@ -114,7 +115,7 @@ node insertAnyMenu(node list) {
     printf("\nPress 1: Insert After a Node.\n");
     printf("Press 2: Insert Before a Node.\n");
     printf("Press 3: Insert at Specific Position.\n");
-    printf("\nEnter your choice:: ");
+    printf("\nEnter your choice >> ");
     scanf("%d", &choice);
 
     switch (choice) {
@@ -143,7 +144,7 @@ node deleteMenu(node list) {
     printf("\nPress 1: Delete the first node.\n");
     printf("Press 2: Delete the last node.\n");
     printf("Press 3: Delete at Specific Position\n");
-    printf("\nEnter your choice:: ");
+    printf("\nEnter your choice >> ");
     scanf("%d", &choice);
 
     switch (choice) {
@@ -176,7 +177,7 @@ node sortingMenu(node list) {
 
     printf("\nPress 1: Sort Ascending Order.\n");
     printf("Press 2: Sort Descending Order.\n");
-    printf("\nEnter your choice:: ");
+    printf("\nEnter your choice >> ");
     scanf("%d", &choice);
 
     switch (choice) {
@@ -231,7 +232,7 @@ node insertBeg(node head) {
     int value;
     newNode = createNode();
 
-    printf("Enter the data you want to insert into the list:: ");
+    printf("Enter the data you want to insert into the list >> ");
     scanf("%d", &value);
 
     newNode -> data = value;
@@ -255,7 +256,7 @@ node createListBeg() {
     while (ch != 'q') {
         head = insertBeg(head);
 
-        printf("\nPress 'q' to exit the loop OR press any key to continue:: ");
+        printf("\nPress 'q' to exit the loop OR press any key to continue >> ");
         scanf("\n%c", &ch);
     }
     return head;
@@ -268,7 +269,7 @@ node insertEnd(node head) {
 
     newNode = createNode();
 
-    printf("Enter the value of the list:: ");
+    printf("Enter the value of the list >> ");
     scanf("%d", &value);
 
     newNode -> data = value;
@@ -296,7 +297,7 @@ node createListEnd() {
 
     while (ch != 'q') {
         head = insertEnd(head);
-        printf("\nPress 'q' to exit the loop OR press any key to continue:: ");
+        printf("\nPress 'q' to exit the loop OR press any key to continue >> ");
         scanf("\n%c", &ch);
     }
     return head;
@@ -311,7 +312,7 @@ node insertAfter(node head) {
     printf("\nYour current list is : \n");
     printList(head);
 
-    printf("\nEnter the position after which you want to insert the new node (starting from 0):: ");
+    printf("\nEnter the position after which you want to insert the new node (starting from 0) >> ");
     scanf("%d", &choice);
 
     newNode = createNodeWithValue();
@@ -345,7 +346,7 @@ node insertBefore(node head) {
     printf("\nYour current list is : \n");
     printList(head);
 
-    printf("\nEnter the position before which you want to insert the new node (starting from 0):: ");
+    printf("\nEnter the position before which you want to insert the new node (starting from 0) >> ");
     scanf("%d", &choice);
 
     newNode = createNodeWithValue();
@@ -380,7 +381,7 @@ node insertAny(node head) {
     printf("\nYour current list is : \n");
     printList(head);
 
-    printf("\nEnter the position where you want to insert the new value (starting from 0):: ");
+    printf("\nEnter the position where you want to insert the new value (starting from 0) >> ");
     scanf("%d", &choice);
 
     newNode = createNodeWithValue();
@@ -418,7 +419,7 @@ node createNodeWithValue() {
         return 0;
     }
 
-    printf("\nEnter the new data:: ");
+    printf("\nEnter the new data >> ");
     scanf("%d", &value);
     newNode -> data = value;
     return newNode;
@@ -427,6 +428,8 @@ node createNodeWithValue() {
 // delete at the beginning
 node deleteBeg(node head) {
     node temp = NULL;
+    printf("\nYour current list is:\n");
+    printList(head);
     if (head == NULL) {
         printf("\nList is empty!\n");
         return 0;
@@ -445,6 +448,10 @@ node deleteBeg(node head) {
 node deleteEnd(node head) {
     node p, q;
     int temp;
+
+    printf("\nYour current list is:\n");
+    printList(head);
+
     if (head == NULL) {
         printf("\nList is empty!\n");
         return 0;
@@ -476,7 +483,7 @@ node deleteAny(node head) {
     printf("\nYour current list is : \n");
     printList(head);
 
-    printf("\nEnter the position of the node to delete(starting from 0):: ");
+    printf("\nEnter the position of the node to delete(starting from 0) >> ");
     scanf("%d", &pos);
 
     if (head == NULL) {
@@ -517,7 +524,7 @@ node createList() {
     while (ch != 'q') {
         head = insertBeg(head);
 
-        printf("\nPress 'q' to exit the loop OR press any key to continue:: ");
+        printf("\nPress 'q' to exit the loop OR press any key to continue >> ");
         scanf("\n%c", &ch);
     }
     return head;
@@ -597,6 +604,30 @@ node concat(node a) {
 }
 
 
+// reversing
+node reverse(node head) {
+    node preptr = NULL, ptr, temp = NULL;
+
+    printf("\nThe current list is: \n");
+    printList(head);
+
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    }else {
+        ptr = head;
+        while (ptr != NULL) {
+            temp = ptr -> next;
+            ptr -> next = preptr;
+            preptr = ptr;
+            ptr = temp;
+        }
+        printf("\nAfter reversing the list is: \n");
+        printList(preptr);
+        return preptr;
+    }
+}
+
+
 
 /* ----------------------Main Function-------------------------*/
 void main() {
@@ -611,9 +642,10 @@ void main() {
         printf("Press 4: Delete an Element\n");
         printf("Press 5: Sort the List\n");
         printf("Press 6: Concatenate\n");
-        printf("Press 7: Exit");
+        printf("Press 7: Reverse\n");
+        printf("Press 99: Exit");
         printf("\n<====================================================>\n");
-        printf("Enter your choice:: ");
+        printf("Enter your choice >> ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -651,9 +683,15 @@ void main() {
                 printf("Enter elements of the Second List:\n");
                 list = concat(list);
                 break;
-            
+
             case 7:
+                printf("\nReversing...\n");
+                list = reverse(list);
+                break;
+            
+            case 99:
                 // exiting condition
+                printf("\nThank you!\n");
                 exit(1);
             
             default:
