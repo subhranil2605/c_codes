@@ -18,6 +18,7 @@ node insertBeg(node head);
 node createList();
 node printList(node p);
 node sort(node head);
+void swap(int* a, int* b);
 
 
 // Function definitions
@@ -89,15 +90,19 @@ node sort(node head) {
         for (p = head; p != NULL; p = p -> next) {
             for (q = p -> next; q != NULL; q = q -> next) {
                 if (p -> data > q -> data) {
-                    p -> data = p -> data + q -> data;
-                    q -> data = p -> data - q -> data;
-                    p -> data = p -> data - q -> data;
+                    swap(&p -> data, &q -> data);
                 }
             }
         }
         return head;
     }
 
+}
+
+void swap(int* a, int* b) {
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
 }
 
 
