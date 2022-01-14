@@ -74,7 +74,7 @@ node createList() {
 }
 
 
-// delete at the beginning
+// delete at the end
 node deleteEnd(node head) {
     node p, q;
     int temp;
