@@ -1,6 +1,5 @@
 /*
 Subhranil Sarkar
-
 */
 
 #include<stdio.h>
@@ -17,7 +16,8 @@ node createNode();
 node insertBeg(node head);
 node createList();
 node printList(node p);
-node sort(node head);
+node sortAsc(node head);
+node sortDesc(node head);
 void swap(int* a, int* b);
 
 
@@ -81,8 +81,8 @@ node createList() {
     return head;
 }
 
-// sorting
-node sort(node head) {
+// ascending sorting
+node sortAsc(node head) {
     node p, q;
     if (head == NULL) {
         printf("\nThe list is empty.\n");
@@ -99,6 +99,26 @@ node sort(node head) {
 
 }
 
+
+// descending sorting
+node sortDesc(node head) {
+    node p, q;
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    }else {
+        for (p = head; p != NULL; p = p -> next) {
+            for (q = p -> next; q != NULL; q = q -> next) {
+                if (p -> data < q -> data) {
+                    swap(&p -> data, &q -> data);
+                }
+            }
+        }
+        return head;
+    }
+
+}
+
+
 void swap(int* a, int* b) {
     *a = *a + *b;
     *b = *a - *b;
@@ -111,7 +131,7 @@ void main() {
     node list;
     list = createList();
     printList(list);
-    list = sort(list);
+    list = sortDesc(list);
     printf("After sorting => ");
     printList(list);
 }

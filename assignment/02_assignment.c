@@ -32,6 +32,9 @@ node createNodeWithValue();
 node deleteBeg(node head);
 node deleteEnd(node head);
 node deleteAny(node head);
+node sortAsc(node head);
+node sortDesc(node head);
+void swap(int* a, int* b);
 
 
 
@@ -137,7 +140,7 @@ node deleteMenu(node list) {
 
     printf("\nPress 1: Delete the first node.\n");
     printf("Press 2: Delete the last node.\n");
-    printf("Press 3: Delete at Specific Position: 3\n");
+    printf("Press 3: Delete at Specific Position\n");
     printf("\nEnter your choice:: ");
     scanf("%d", &choice);
 
@@ -164,6 +167,33 @@ node deleteMenu(node list) {
     return list;
 }
 
+
+// Sorting menu
+node sortingMenu(node list) {
+    int choice;
+
+    printf("\nPress 1: Sort Ascending Order.\n");
+    printf("Press 2: Sort Descending Order.\n");
+    printf("\nEnter your choice:: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("Sorting in ascending order...\n");
+            list = sortAsc(list);
+            break;
+        
+        case 2:
+            printf("Sorting in descending order...\n");
+            list = sortDesc(list);
+            break;
+        
+        default:
+            printf("Incorrect choice");
+            break;
+    }
+    return list;
+}
 
 // --------------------------------------------------
 
@@ -400,6 +430,7 @@ node deleteBeg(node head) {
         head = head -> next;
         printf("\nThe deleted element is: %d\n", temp -> data);
     }
+    printf("\nAfter deleting the list is => \n");
     printList(head);
     return head;
 }
@@ -427,6 +458,7 @@ node deleteEnd(node head) {
         temp = p -> data;
     }
     printf("\nDeleted element is: %d\n", temp);
+    printf("\nAfter deleting the list is => \n");
     printList(head);
     return head;
 }
@@ -470,6 +502,73 @@ node deleteAny(node head) {
     return head;
 }
 
+// creating list
+node createList() {
+    char ch;
+    node head;
+
+    head = NULL;
+
+    while (ch != 'q') {
+        head = insertBeg(head);
+
+        printf("\nPress 'q' to exit the loop OR press any key to continue:: ");
+        scanf("\n%c", &ch);
+    }
+    return head;
+}
+
+// sorting
+node sortAsc(node head) {
+    node p, q;
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    }else {
+        printf("\nYour current list is =>\t");
+        printList(head);
+        for (p = head; p != NULL; p = p -> next) {
+            for (q = p -> next; q != NULL; q = q -> next) {
+                if (p -> data > q -> data) {
+                    swap(&p -> data, &q -> data);
+                }
+            }
+        }
+        printf("\nThe sorted list is =>\n");
+        printList(head);
+        return head;
+    }
+
+}
+
+// descending sorting
+node sortDesc(node head) {
+    node p, q;
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    }else {
+        printf("\nYour current list is =>\t");
+        printList(head);
+        for (p = head; p != NULL; p = p -> next) {
+            for (q = p -> next; q != NULL; q = q -> next) {
+                if (p -> data < q -> data) {
+                    swap(&p -> data, &q -> data);
+                }
+            }
+        }
+        printf("\nThe sorted list is =>\n");
+        printList(head);
+        return head;
+    }
+
+}
+
+// swapping using call by reference
+void swap(int* a, int* b) {
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
 
 // main function
 void main() {
@@ -482,7 +581,8 @@ void main() {
         printf("Press 2: Display List\n");
         printf("Press 3: Insert an Element\n");
         printf("Press 4: Delete an Element\n");
-        printf("Press 5: Exit");
+        printf("Press 5: Sorting the List\n");
+        printf("Press 6: Exit");
         printf("\n====================================================\n");
         printf("Enter your choice:: ");
         scanf("%d", &choice);
@@ -513,6 +613,11 @@ void main() {
                 break;
             
             case 5:
+                printf("\nSorting...\n");
+                list = sortingMenu(list);
+                break;
+            
+            case 6:
                 // exiting condition
                 exit(1);
             
