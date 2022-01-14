@@ -30,51 +30,6 @@ node insertAny(node head);
 node createNodeWithValue();
 
 
-// main function
-void main() {
-    int choice;
-    node list = NULL;
-
-    while (1) {
-        printf("\n====================================================\n");
-        printf("Press 1: Create a List\n");
-        printf("Press 2: Display List\n");
-        printf("Press 3: Insert an Element\n");
-        printf("Press 4: Exit");
-        printf("\n====================================================\n");
-        printf("Enter your choice:: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                printf("\nCreating a List...\n");
-                list = createMenu(list);
-                break;
-
-            case 2:
-                printf("\nDisplaying a List...\n");
-                if (list != NULL) {
-                    printList(list);
-                } else {
-                    printf("\nThe list is empty!\n");
-                }
-                break;
-
-            case 3:
-                printf("\nInserting a List...\n");
-                list = insertMenu(list);
-                break;
-            
-            case 4:
-                // exiting condition
-                exit(1);
-            
-            default:
-                printf("\nIncorrect choice!\n");
-                break;
-        }
-    }
-}
 
 // --------------------------------------------------------------------
 
@@ -393,4 +348,51 @@ node createNodeWithValue() {
     scanf("%d", &value);
     newNode -> data = value;
     return newNode;
+}
+
+
+// main function
+void main() {
+    int choice;
+    node list = NULL;
+
+    while (1) {
+        printf("\n====================================================\n");
+        printf("Press 1: Create a List\n");
+        printf("Press 2: Display List\n");
+        printf("Press 3: Insert an Element\n");
+        printf("Press 4: Exit");
+        printf("\n====================================================\n");
+        printf("Enter your choice:: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("\nCreating a List...\n");
+                list = createMenu(list);
+                break;
+
+            case 2:
+                printf("\nDisplaying a List...\n");
+                if (list != NULL) {
+                    printList(list);
+                } else {
+                    printf("\nThe list is empty!\n");
+                }
+                break;
+
+            case 3:
+                printf("\nInserting a List...\n");
+                list = insertMenu(list);
+                break;
+            
+            case 4:
+                // exiting condition
+                exit(1);
+            
+            default:
+                printf("\nIncorrect choice!\n");
+                break;
+        }
+    }
 }
