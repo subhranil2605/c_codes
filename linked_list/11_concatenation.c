@@ -16,6 +16,7 @@ node createNode();
 node insertEnd(node head, int i);
 node createList();
 node printList(node p);
+node concat(node a, node b);
 
 
 

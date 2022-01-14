@@ -35,6 +35,7 @@ node deleteAny(node head);
 node sortAsc(node head);
 node sortDesc(node head);
 void swap(int* a, int* b);
+node concat(node a);
 
 
 /* -------------------------------------------------------------------- */
@@ -573,6 +574,29 @@ void swap(int* a, int* b) {
     *a = *a - *b;
 }
 
+// concatenation
+node concat(node a) {
+    node b ;
+    b = createMenu(b);
+    node p;
+    if (a == NULL) {
+        return b;
+    } 
+    if (b == NULL){
+        return a;
+    } 
+    p = a;
+    while (a -> next != NULL) {
+        a = a -> next;
+    }
+    a -> next = b;
+
+    printf("\nAfter adding two lists: \n");
+    printList(p);
+    return p;
+}
+
+
 
 /* ----------------------Main Function-------------------------*/
 void main() {
@@ -585,8 +609,9 @@ void main() {
         printf("Press 2: Display List\n");
         printf("Press 3: Insert an Element\n");
         printf("Press 4: Delete an Element\n");
-        printf("Press 5: Sorting the List\n");
-        printf("Press 6: Exit");
+        printf("Press 5: Sort the List\n");
+        printf("Press 6: Concatenate\n");
+        printf("Press 7: Exit");
         printf("\n<====================================================>\n");
         printf("Enter your choice:: ");
         scanf("%d", &choice);
@@ -622,6 +647,12 @@ void main() {
                 break;
             
             case 6:
+                printf("\nConcatenating...\n");
+                printf("Enter elements of the Second List:\n");
+                list = concat(list);
+                break;
+            
+            case 7:
                 // exiting condition
                 exit(1);
             
