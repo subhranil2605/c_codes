@@ -16,6 +16,7 @@ typedef struct node* node;
 node createMenu(node list);
 node insertMenu(node list);
 node insertAnyMenu(node list);
+node deleteMenu(node list);
 
 // node functions
 node createNode();
@@ -28,6 +29,9 @@ node insertAfter(node head);
 node insertBefore(node head);
 node insertAny(node head);
 node createNodeWithValue();
+node deleteBeg(node head);
+node deleteEnd(node head);
+node deleteAny(node head);
 
 
 
@@ -67,7 +71,7 @@ node insertMenu(node list) {
 
     printf("\nPress 1: Insert at the Beginning\n");
     printf("Press 2: Insert at the End\n");
-    printf("Press 3:Insert at any position\n");
+    printf("Press 3: Insert at any position\n");
     printf("\nEnter your choice to create a list:: ");
     scanf("%d", &choice);
 
@@ -98,12 +102,13 @@ node insertMenu(node list) {
     return list;
 }
 
+// Inserting element menu
 node insertAnyMenu(node list) {
     int choice;
 
-    printf("\nPress 1: Insert After a Node: 1\n");
-    printf("Press 2: Insert Before a Node: 2\n");
-    printf("Press 3: Insert at Specific Position: 3\n");
+    printf("\nPress 1: Insert After a Node.\n");
+    printf("Press 2: Insert Before a Node.\n");
+    printf("Press 3: Insert at Specific Position.\n");
     printf("\nEnter your choice:: ");
     scanf("%d", &choice);
 
@@ -125,6 +130,40 @@ node insertAnyMenu(node list) {
             break;
     }
 }
+
+// delete menu
+node deleteMenu(node list) {
+    int choice;
+
+    printf("\nPress 1: Delete the first node.\n");
+    printf("Press 2: Delete the last node.\n");
+    printf("Press 3: Delete at Specific Position: 3\n");
+    printf("\nEnter your choice:: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("Deleting the first element...\n");
+            list = deleteBeg(list);
+            break;
+        
+        case 2:
+            printf("Deleting the last element...\n");
+            list = deleteEnd(list);
+            break;
+        
+        case 3:
+            printf("Deleting the specific element...\n");
+            list = deleteAny(list);
+            break;
+        
+        default:
+            printf("Incorrect choice");
+            break;
+    }
+    return list;
+}
+
 
 // --------------------------------------------------
 
@@ -350,6 +389,87 @@ node createNodeWithValue() {
     return newNode;
 }
 
+// delete at the beginning
+node deleteBeg(node head) {
+    node temp = NULL;
+    if (head == NULL) {
+        printf("\nList is empty!\n");
+        return 0;
+    } else {
+        temp = head;
+        head = head -> next;
+        printf("\nThe deleted element is: %d\n", temp -> data);
+    }
+    printList(head);
+    return head;
+}
+
+
+// delete at the end
+node deleteEnd(node head) {
+    node p, q;
+    int temp;
+    if (head == NULL) {
+        printf("\nList is empty!\n");
+        return 0;
+    } else if (head -> next == NULL) {
+        p = head;
+        head = NULL;
+        temp = p -> data;
+    } else {
+        q = head;
+        p = head -> next;
+        while (p -> next != NULL) {
+            q = p;
+            p = p -> next;
+        }
+        q -> next = NULL;
+        temp = p -> data;
+    }
+    printf("\nDeleted element is: %d\n", temp);
+    printList(head);
+    return head;
+}
+
+// delete at any position
+node deleteAny(node head) {
+    node ptr, preptr;
+    int temp, pos, i;
+
+    printf("\nYour current list is : \n");
+    printList(head);
+
+    printf("\nEnter the position of the node to delete(starting from 0):: ");
+    scanf("%d", &pos);
+
+    if (head == NULL) {
+        printf("\nList is empty!\n");
+        return 0;
+    } else {
+        if (pos == 0) {
+            temp = head -> data;
+            head = head -> next;
+        } else {
+            preptr = head;
+            ptr = head;
+            for (i = 0; i < pos; i++) {
+                preptr = ptr;
+                ptr = ptr -> next;
+                if (ptr == NULL) {
+                    printf("\nIncorrect position! Indexing out of range.\n");
+                    return head;
+                }
+            }
+            temp = ptr -> data;
+            preptr -> next = ptr -> next;
+        }
+    }
+    printf("\nDeleted element is: %d\n", temp);
+    printf("Your list:: \n");
+    printList(head);
+    return head;
+}
+
 
 // main function
 void main() {
@@ -389,6 +509,7 @@ void main() {
             
             case 4:
                 printf("\nDeleting an element from the list...\n");
+                list = deleteMenu(list);
                 break;
             
             case 5:
