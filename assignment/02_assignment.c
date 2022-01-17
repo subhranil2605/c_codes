@@ -15,10 +15,9 @@ typedef struct node* node;
 // Menus
 node createMenu(node list);
 node insertMenu(node list);
-node insertUsingPos(node list);
 node insertUsingVal(node list);
 node deleteMenu(node list);
-node insertType(node list);
+
 
 // node functions
 node createNode();
@@ -30,6 +29,7 @@ node printList(node p);
 node insertAfter(node head);
 node insertBefore(node head);
 node insertAfterNode(node head);
+node insertBeforeNode(node head);
 node insertAny(node head);
 node createNodeWithValue();
 node deleteBeg(node head);
@@ -101,7 +101,7 @@ node insertMenu(node list) {
             break;
         case 3:
             printf("\nInserting any position...\n");
-            list = insertType(list);
+            list = insertUsingVal(list);
             break;
         default:
             printf("Incorrect choice");
@@ -113,30 +113,6 @@ node insertMenu(node list) {
     return list;
 }
 
-// insert type
-node insertType(node list) {
-    int choice;
-
-    printf("\nPress 1: Insert Using Value\n");
-    printf("Press 2: Insert Using Index\n");
-    printf("\nEnter your choice to create a list >> ");
-    scanf("%d", &choice);
-
-    switch (choice) {
-        case 1:
-            printf("\nInserting using value...\n");
-            list = insertUsingVal(list);
-            break;
-        case 2:
-            printf("\nInserting using index..\n");
-            list = insertUsingPos(list);
-            break;
-
-        default:
-            printf("Incorrect choice");
-            break;
-    }
-}
 
 
 // Inserting using value
@@ -145,53 +121,32 @@ node insertUsingVal(node list) {
 
     printf("\nPress 1: Insert After a Node.\n");
     printf("Press 2: Insert Before a Node.\n");
+    printf("Press 3: Insert at a Specified Index");
     printf("\nEnter your choice >> ");
     scanf("%d", &choice);
 
     switch (choice) {
         case 1:
-            printf("Inserting After Using Value...\n");
+            printf("\nInserting After Using Value...\n");
             list = insertAfterNode(list);
             break;
         case 2:
-            printf("Inserting Before Using Value...\n");
+            printf("\nInserting Before Using Value...\n");
+            list = insertBeforeNode(list);
             break;
-        default:
-            printf("Incorrect choice");
-            break;
-    }
-}
 
-
-
-// Inserting using indexing
-node insertUsingPos(node list) {
-    int choice;
-
-    printf("\nPress 1: Insert After a Node.\n");
-    printf("Press 2: Insert Before a Node.\n");
-    printf("Press 3: Insert at Specific Position.\n");
-    printf("\nEnter your choice >> ");
-    scanf("%d", &choice);
-
-    switch (choice) {
-        case 1:
-            printf("Inserting After...\n");
-            list = insertAfter(list);
-            break;
-        case 2:
-            printf("Inserting Before...\n");
-            list = insertBefore(list);
-            break;
-        case 3:
-            printf("Inserting at any position...\n");
+        case 3: 
+            printf("\nInserting at a specific location...\n");
             list = insertAny(list);
             break;
+        
         default:
             printf("Incorrect choice");
             break;
     }
 }
+
+
 
 // delete menu
 node deleteMenu(node list) {
@@ -457,6 +412,40 @@ node insertAfterNode(node head) {
     
 }
 
+
+// insert before using value
+node insertBeforeNode(node head) {
+    int i, value;
+    node ptr, preptr, newNode;
+
+    printf("\nYour current list is : \n");
+    printList(head);
+
+    printf("\nEnter the value of the node before which new node to be inserted >> ");
+    scanf("%d", &value);
+
+    newNode = createNodeWithValue();
+
+    if (value == head -> data) {
+        newNode -> next = head;
+        head  = newNode;
+    } else {
+        ptr = head;
+        while (ptr -> data != value)  {
+            preptr = ptr;
+            ptr = ptr -> next;
+
+            if (ptr == NULL) {
+                printf("Entered data is not present in the list!\n");
+                return head;
+            } 
+        }
+        preptr -> next = newNode;
+        newNode -> next = ptr;
+    }
+    return head;
+    
+}
 
 
 // insert any

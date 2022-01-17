@@ -83,7 +83,7 @@ node createList() {
 
 
 
-// insert after using value
+// insert before using value
 node insertBeforeNode(node head) {
     int i, value;
     node ptr, preptr, newNode;
@@ -96,18 +96,23 @@ node insertBeforeNode(node head) {
 
     newNode = createNodeWithValue();
 
-    ptr = head;
-    while (ptr -> data != value)  {
-        preptr = ptr;
-        ptr = ptr -> next;
+    if (value == head -> data) {
+        newNode -> next = head;
+        head  = newNode;
+    } else {
+        ptr = head;
+        while (ptr -> data != value)  {
+            preptr = ptr;
+            ptr = ptr -> next;
 
-        if (ptr == NULL) {
-            printf("Entered data is not present in the list!\n");
-            return head;
+            if (ptr == NULL) {
+                printf("Entered data is not present in the list!\n");
+                return head;
+            } 
         }
+        preptr -> next = newNode;
+        newNode -> next = ptr;
     }
-    preptr -> next = newNode;
-    newNode -> next = ptr;
     return head;
     
 }
@@ -136,6 +141,6 @@ void main() {
     list = createList();
     printList(list);
 
-    list = insertAfterNode(list);
+    list = insertBeforeNode(list);
     printList(list);
 }
