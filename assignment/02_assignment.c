@@ -15,7 +15,7 @@ typedef struct node* node;
 // Menus
 node createMenu(node list);
 node insertMenu(node list);
-node insertUsingVal(node list);
+node insertAnySpec(node list);
 node deleteMenu(node list);
 
 
@@ -100,8 +100,8 @@ node insertMenu(node list) {
             list = insertEnd(list);
             break;
         case 3:
-            printf("\nInserting any position...\n");
-            list = insertUsingVal(list);
+            printf("\nInserting at any position...\n");
+            list = insertAnySpec(list);
             break;
         default:
             printf("Incorrect choice");
@@ -116,7 +116,7 @@ node insertMenu(node list) {
 
 
 // Inserting using value
-node insertUsingVal(node list) {
+node insertAnySpec(node list) {
     int choice;
 
     printf("\nPress 1: Insert After a Node.\n");
