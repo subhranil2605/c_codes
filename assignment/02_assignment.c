@@ -15,8 +15,10 @@ typedef struct node* node;
 // Menus
 node createMenu(node list);
 node insertMenu(node list);
-node insertAnyMenu(node list);
+node insertUsingPos(node list);
+node insertUsingVal(node list);
 node deleteMenu(node list);
+node insertType(node list);
 
 // node functions
 node createNode();
@@ -27,6 +29,7 @@ node createListEnd();
 node printList(node p);
 node insertAfter(node head);
 node insertBefore(node head);
+node insertAfterNode(node head);
 node insertAny(node head);
 node createNodeWithValue();
 node deleteBeg(node head);
@@ -71,13 +74,15 @@ node createMenu(node list) {
     return list;
 }
 
+
+
 // Insertion menu
 node insertMenu(node list) {
     int choice;
 
     printf("\nPress 1: Insert at the Beginning\n");
     printf("Press 2: Insert at the End\n");
-    printf("Press 3: Insert at any position\n");
+    printf("Press 3: Insert at Specified Position\n");
     printf("\nEnter your choice to create a list >> ");
     scanf("%d", &choice);
 
@@ -96,7 +101,7 @@ node insertMenu(node list) {
             break;
         case 3:
             printf("\nInserting any position...\n");
-            list = insertAnyMenu(list);
+            list = insertType(list);
             break;
         default:
             printf("Incorrect choice");
@@ -108,8 +113,59 @@ node insertMenu(node list) {
     return list;
 }
 
-// Inserting element menu
-node insertAnyMenu(node list) {
+// insert type
+node insertType(node list) {
+    int choice;
+
+    printf("\nPress 1: Insert Using Value\n");
+    printf("Press 2: Insert Using Index\n");
+    printf("\nEnter your choice to create a list >> ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("\nInserting using value...\n");
+            list = insertUsingVal(list);
+            break;
+        case 2:
+            printf("\nInserting using index..\n");
+            list = insertUsingPos(list);
+            break;
+
+        default:
+            printf("Incorrect choice");
+            break;
+    }
+}
+
+
+// Inserting using value
+node insertUsingVal(node list) {
+    int choice;
+
+    printf("\nPress 1: Insert After a Node.\n");
+    printf("Press 2: Insert Before a Node.\n");
+    printf("\nEnter your choice >> ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("Inserting After Using Value...\n");
+            list = insertAfterNode(list);
+            break;
+        case 2:
+            printf("Inserting Before Using Value...\n");
+            break;
+        default:
+            printf("Incorrect choice");
+            break;
+    }
+}
+
+
+
+// Inserting using indexing
+node insertUsingPos(node list) {
     int choice;
 
     printf("\nPress 1: Insert After a Node.\n");
@@ -371,6 +427,36 @@ node insertBefore(node head) {
     return head;
     
 }
+
+
+// insert after using value
+node insertAfterNode(node head) {
+    int i, value;
+    node ptr, newNode;
+
+    printf("\nYour current list is : \n");
+    printList(head);
+
+    printf("\nEnter the value of the node after which new node to be inserted >> ");
+    scanf("%d", &value);
+
+    newNode = createNodeWithValue();
+
+    ptr = head;
+    while (ptr -> data != value)  {
+        ptr = ptr -> next;
+
+        if (ptr == NULL) {
+            printf("Entered data is not present in the list!\n");
+            return head;
+        }
+    }
+    newNode -> next = ptr -> next;
+    ptr -> next = newNode;
+    return head;
+    
+}
+
 
 
 // insert any
