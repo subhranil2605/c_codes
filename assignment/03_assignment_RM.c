@@ -23,7 +23,7 @@ node displayList(node p) {
         if (p != NULL) {
             printf("%d-->", p -> data);
         } else {
-            printf("NULL");
+            printf("NULL\n");
             break;
         }
     }

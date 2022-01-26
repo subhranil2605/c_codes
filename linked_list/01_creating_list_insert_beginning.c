@@ -36,7 +36,6 @@ node printList(node p) {
             printf("NULL\n");
             break;
         }
-        p = p -> next;
     }
 }
 
@@ -53,8 +52,8 @@ node createNode() {
 node insertBeg(node head) {
     node newNode;
     int value;
-    newNode = createNode();
 
+    newNode = createNode();
     printf("Enter the data you want to insert into the list:: ");
     scanf("%d", &value);
 

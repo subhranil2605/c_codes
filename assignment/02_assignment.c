@@ -660,6 +660,7 @@ void swap(int* a, int* b) {
 node concat(node a) {
     node b ;
     b = createMenu(b);
+    
     node p;
     if (a == NULL) {
         return b;
