@@ -3,19 +3,19 @@
 
 
 struct node {
-    int value;
+    float value;
     int exp;
     struct node* next;
 };
 
 typedef struct node* node;
 
-void displayList(node p);
+void displayPoly(node p);
 
-void displayList(node p) {
+void displayPoly(node p) {
     while (1) {
         if (p != NULL) {
-            printf("%dx^%d--> ", p -> value, p -> exp);
+            printf("%0.2fx^%d--> ", p -> value, p -> exp);
         } else {
             printf("NULL\n");
             break;
@@ -55,5 +55,5 @@ void main() {
     head = one;
 
     printf("\nThe Polynomial is:\n");
-    displayList(head);
+    displayPoly(head);
 }
