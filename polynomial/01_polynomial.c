@@ -13,7 +13,15 @@ typedef struct node* node;
 void displayList(node p);
 
 void displayList(node p) {
-    
+    while (1) {
+        if (p != NULL) {
+            printf("%dx^%d--> ", p -> value, p -> exp);
+        } else {
+            printf("NULL\n");
+            break;
+        }
+        p = p -> next;
+    }
 }
 
 void main() {
@@ -34,7 +42,7 @@ void main() {
     one -> value = 5;
     one -> exp = 2;
 
-    two -> value = 6;
+    two -> value = -6;
     two -> exp = 1;
 
     three -> value = 8;
@@ -45,4 +53,7 @@ void main() {
     two -> next = three;
     three -> next = NULL;
     head = one;
+
+    printf("\nThe Polynomial is:\n");
+    displayList(head);
 }
