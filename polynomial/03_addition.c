@@ -79,5 +79,23 @@ void show(node p) {
             break;
         }
         p = p -> next;
+    }
 }
 
+
+void main() {
+    node poly1 = NULL , poly2 = NULL, poly = NULL;
+
+    // First polynomial
+    createNode(5, 2, poly1);
+    createNode(4, 1, poly1);
+    createNode(2, 0, poly1);
+
+    // second polynomial
+    createNode(-5, 1, poly2);
+    createNode(-5, 0, poly2);
+
+    poly = (node) malloc(sizeof(node));
+    polyAdd(poly1, poly2, poly);
+    show(poly);
+}
