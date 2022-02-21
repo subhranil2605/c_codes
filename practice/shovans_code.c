@@ -67,7 +67,7 @@ node addPolynomial(node fpoly, node spoly) {
     p = fpoly;
     q = spoly;
     while(p != NULL && q != NULL) {
-        next = (node )malloc(sizeof(node));
+        next = (node)malloc(sizeof(node));
         if(p->power == q->power) {
             result->coeff = p->coeff + q->coeff;
             result->power = p->power;
