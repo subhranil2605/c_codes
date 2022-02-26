@@ -100,7 +100,7 @@ node createNode() {
 
 
 // display
-void diplayLi(node p) {
+void displayLi(node p) {
     if (p == NULL) {
         printf("\nThe STACK is empty!");
     } else {
@@ -202,6 +202,9 @@ void arrayMenu() {
                 break;
             case 5:
                 exit(1);
+            default:
+                printf("\nWrong Choice\n");
+                break;
         }
     }
 }
@@ -242,6 +245,9 @@ void llMenu() {
                 break;
             case 5:
                 exit(1);
+            default:
+                printf("\nWrong Choice\n");
+                break;
         }
     }
 }
@@ -251,30 +257,28 @@ void llMenu() {
 void main() {
     int choice;
 
-    printf("\n============================\n");
-    printf("Press 1: Stack Using Array\n");
-    printf("Press 2: Stack Using Linked List\n");
-    printf("Press 3: Exit");
-    printf("\n============================\n");
-    printf("Enter Your Choice >> ");
-    scanf("%d", &choice);
-
     while (1) {
+        printf("\n============================\n");
+        printf("Press 1: Stack Using Array\n");
+        printf("Press 2: Stack Using Linked List\n");
+        printf("Press 3: Exit");
+        printf("\n============================\n");
+        printf("Enter Your Choice >> ");
+        scanf("%d", &choice);
         switch (choice) {
-        case 1:
-            printf("\nCreating STACK Using Array...\n");
-            arrayMenu();
-            break;
-        case 2:
-            printf("\nCreating STACK Using Linked List...\n");
-            llMenu();
-            break;
-        case 3:
-            exit(1);
-        
-        default:
-            printf("\nWrong Choice\n");
-            break;
+            case 1:
+                printf("\nCreating STACK Using Array...\n");
+                arrayMenu();
+                break;
+            case 2:
+                printf("\nCreating STACK Using Linked List...\n");
+                llMenu();
+                break;
+            case 3:
+                exit(1);
+            default:
+                printf("\nWrong Choice\n");
+                break;
         }
     }
 }
