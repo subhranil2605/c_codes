@@ -1,14 +1,13 @@
 #include<stdio.h>
-#define MAX 3
+#include<stdlib.h>
 
 
 int front = -1, rear = -1;
-int queue[MAX];
 
 
 // Function prototypes
 void display(int que[]);
-void insert(int que[], int val);
+void insert(int que[], int val, int MAX);
 int delete(int que[]);
 
 
@@ -18,8 +17,9 @@ void display(int que[]) {
     if (front == -1 || front > rear) {
         printf("\nQUEUE is Empty!!!\n");
     } else {
+        printf("\nThe QUEUE is: ");
         for (i = front; i <= rear; i++) {
-            printf("%d\t", que[i]);
+            printf("%d -> ", que[i]);
         }
         printf("\n");
     }
@@ -27,7 +27,7 @@ void display(int que[]) {
 
 
 // Inserting 
-void insert(int que[], int val) {
+void insert(int que[], int val, int MAX) {
     if (rear == MAX - 1) {
         printf("The QUEUE is FULL!!!");
     } else if (front == -1 && rear == -1) {
@@ -35,7 +35,6 @@ void insert(int que[], int val) {
         que[rear] = val;
     } else {
         rear++;
-        printf("The inserted value is --> %d\n", val);
         que[rear] = val;
     }
 }
@@ -59,29 +58,45 @@ int delete(int que[]) {
 
 // Main function
 void main() {
-    int val;
-    display(queue);
+    int MAX;
+    int val, choice;
+    
+    printf("Enter the size of the array: ");
+    scanf("%d", &MAX);
+    int queue[MAX];
 
-    insert(queue, 5);
-    display(queue);
+    while (1) {
+        printf("\n=========================\n");
+        printf("Press 1: Insert\n");
+        printf("Press 2: Delete\n");
+        printf("Press 3: Display\n");
+        printf("Press 3: Exit");
+        printf("\n=========================\n");
+        printf("\nEnter your choice >> ");
+        scanf("%d", &choice);
 
-    insert(queue, 6);
-    display(queue);
-
-    insert(queue, 10);
-    display(queue);
-
-
-    printf("\nDeleting the front element...\n");
-    val = delete(queue);
-    printf("The deleted element is %d\n", val);
-    display(queue);
-
-    val = delete(queue);
-    printf("The deleted element is %d\n", val);
-    display(queue);
-
-    val = delete(queue);
-    printf("The deleted element is %d\n", val);
-    display(queue);
+        switch (choice)
+        {
+        case 1:
+            printf("\nEnter the data to be inserted >> ");
+            scanf("%d", &val);
+            insert(queue, val, MAX);
+            break;
+        case 2:
+            val = delete(queue);
+            if (val != -1) {
+                printf("\nThe deleted element is: %d", val);
+            }
+            break;
+        case 3:
+            display(queue);
+            break;
+        case 4:
+            exit(1);
+        
+        default:
+            printf("\nWrong choice!!! Please choose correct value.\n");
+            break;
+        }
+    }
 }
