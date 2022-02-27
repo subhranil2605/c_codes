@@ -9,6 +9,7 @@ int queue[MAX];
 // Function prototypes
 void display(int que[]);
 void insert(int que[], int val);
+int delete(int que[]);
 
 
 // Displaying the QUEUE
@@ -39,6 +40,22 @@ void insert(int que[], int val) {
     }
 }
 
+// deleting function
+int delete(int que[]) {
+    int val;
+    if (front == -1 || front > rear) {
+        printf("\nThe QUEUE is empty!!!");
+        return -1;
+    } else {
+        val = que[front];
+        front++;
+        if (front > rear) {
+            front = rear = -1;
+        }
+        return val;
+    }
+}
+
 
 // Main function
 void main() {
@@ -54,4 +71,17 @@ void main() {
     insert(queue, 10);
     display(queue);
 
+
+    printf("\nDeleting the front element...\n");
+    val = delete(queue);
+    printf("The deleted element is %d\n", val);
+    display(queue);
+
+    val = delete(queue);
+    printf("The deleted element is %d\n", val);
+    display(queue);
+
+    val = delete(queue);
+    printf("The deleted element is %d\n", val);
+    display(queue);
 }
