@@ -196,7 +196,7 @@ void menuQAr() {
         printf("Press 1: Insert\n");
         printf("Press 2: Delete\n");
         printf("Press 3: Display\n");
-        printf("Press 3: Exit");
+        printf("Press 4: Exit");
         printf("\n=========================\n");
         printf("\nEnter your choice >> ");
         scanf("%d", &choice);
@@ -217,6 +217,7 @@ void menuQAr() {
             displayQAr(queue);
             break;
         case 4:
+            // break;
             exit(1);
         
         default:
@@ -249,20 +250,20 @@ void menuQLi() {
                 printf("\nInserting...\n");
                 printf("\nEnter the value to be inserted >> ");
                 scanf("%d", &val);
-                que = insert(que, val);
+                que = insertQLi(que, val);
                 break;
             case 2:
                 printf("\nDeleting...\n");
-                que = delete(que);
+                que = deleteQLi(que);
                 break;
             case 3:
-                val = peek(que);
+                val = peekQLi(que);
                 (val == -1) ? printf("\nQUEUE is empty.\n") 
                             : printf("\nThe front element is: %d\n", val);  
                 break;
             case 4:
                 printf("\nCurrent QUEUE is: ");
-                display(que);
+                displayQLi(que);
                 break;
             case 5:
                 exit(1);
@@ -280,9 +281,9 @@ void main() {
     int choice;
     while (1) {
         printf("\n===============\n");
-        prinf("Press 1: Create QUEUE using Array.\n");
-        prinf("Press 2: Create QUEUE using Linked List.\n");
-        prinf("Press 3: Exit");
+        printf("Press 1: Create QUEUE using Array.\n");
+        printf("Press 2: Create QUEUE using Linked List.\n");
+        printf("Press 3: Exit");
         printf("\n===============\n");
 
         printf("\nEnter your choice >> ");
