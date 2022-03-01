@@ -22,6 +22,7 @@ typedef struct queue* queue;
 node createNode();
 queue createQueue();
 queue insert(queue q, int val);
+queue delete(queue q);
 void display(queue q);
 
 
@@ -62,12 +63,32 @@ queue insert(queue q, int val) {
     return q;
 }
 
+
+// deletion
+queue delete(queue q) {
+    int val;
+    node p, temp;
+
+    p = q -> front;
+    if (p == NULL) {
+        printf("\nThe QUEUE is empty!!! So, no element is deleted\n");
+        return q;
+    } else {
+        temp = p;
+        p = p -> next;
+        q -> front = p;
+        printf("\nThe deleted element is %d\n", temp -> data);
+        return q;
+    }
+}
+
+
 // display queue
 void display(queue q) {
     node ptr;
     ptr = q -> front;
     if (ptr == NULL) {
-        printf("\nThe QUEUE is EMPTY.");
+        printf("\nThe QUEUE is EMPTY.\n");
     } else {
         while (1) {
             if (ptr != q -> rear) {
@@ -92,6 +113,13 @@ void main() {
     que = insert(que, 5);
     que = insert(que, 10);
     que = insert(que, 100);
+
+    display(que);
+
+    que = delete(que);
+    que = delete(que);
+    que = delete(que);
+
 
     display(que);
 }
