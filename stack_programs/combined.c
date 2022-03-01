@@ -17,25 +17,25 @@ typedef struct node* node;
 // function prototypes
 
 // stack using array 
-void displayAr(int st[]);
-void pushAr(int st[], int val, int MAX);
-int popAr(int st[]);
-int peekAr(int st[]);
-void arrayMenu();
+void displaySAr(int st[]);
+void pushSAr(int st[], int val, int MAX);
+int popSAr(int st[]);
+int peekSAr(int st[]);
+void menuSAr();
 
 // stack using linked list 
 node createNode();
-node pushLi(node top, int val);
-node popLi(node top);
-int peekLi(node top);
-void displayLi(node p);
-void llMenu();
+node pushSLi(node top, int val);
+node popSLi(node top);
+int peekSLi(node top);
+void displaySLi(node p);
+void menuSLi();
 
 
 /* Stack using array functions */
 
 // display
-void displayAr(int st[]) {
+void displaySAr(int st[]) {
     int i;
     if (top == -1) {
         printf("\nThe STACK is Empty!!!\n");
@@ -47,7 +47,7 @@ void displayAr(int st[]) {
 }
 
 // PUSH Operation
-void pushAr(int st[], int val, int MAX) {
+void pushSAr(int st[], int val, int MAX) {
     if (top == MAX - 1) {
         printf("\nSTACK is Full!!!\n");
     } else {
@@ -58,7 +58,7 @@ void pushAr(int st[], int val, int MAX) {
 
 
 // POP Operation
-int popAr(int st[]) {
+int popSAr(int st[]) {
     int val;
     if (top == - 1) {
         printf("\nSTACK is Empty!!!\n");
@@ -72,7 +72,7 @@ int popAr(int st[]) {
 
 
 // PEEK Opeation
-int peekAr(int st[]) {
+int peekSAr(int st[]) {
     if (top == -1) {
         printf("\nStack is empty\n");
         return -1;
@@ -100,7 +100,7 @@ node createNode() {
 
 
 // display
-void displayLi(node p) {
+void displaySLi(node p) {
     if (p == NULL) {
         printf("\nThe STACK is empty!");
     } else {
@@ -118,7 +118,7 @@ void displayLi(node p) {
 
 
 // PUSH Operation
-node pushLi(node head, int val) {
+node pushSLi(node head, int val) {
     node newNode;
     newNode = createNode();
     newNode -> data = val;
@@ -134,7 +134,7 @@ node pushLi(node head, int val) {
 
 
 // POP Operation
-node popLi(node top) {
+node popSLi(node top) {
     node ptr;
     ptr = top;
     
@@ -150,7 +150,7 @@ node popLi(node top) {
 
 
 // PEEK Opeation
-int peekLi(node top){
+int peekSLi(node top){
     if (top == NULL) {
         printf("\nThe STACK is empty\n");
         return -1;
@@ -161,7 +161,7 @@ int peekLi(node top){
 
 
 // array menu function 
-void arrayMenu() {
+void menuSAr() {
     int choice, val, max;
 
     printf("Enter the amount of elements to be inserted in the stack >> ");
@@ -182,23 +182,23 @@ void arrayMenu() {
             case 1:
                 printf("\nEnter the number to be pushed on stack >> ");
                 scanf("%d", &val);
-                pushAr(st, val, max);
+                pushSAr(st, val, max);
                 break;
             case 2:
-                val = popAr(st);
+                val = popSAr(st);
                 if (val != -1) {
                     printf("\nThe deleted data from the stack is: %d", val);
                 }
                 break;
             case 3:
-                val = peekAr(st);
+                val = peekSAr(st);
                 if (val != -1) {
                     printf("\nThe top most element is: %d", val);
                 }
                 break;
             case 4:
                 printf("\nCurrent Stack is\n");
-                displayAr(st);
+                displaySAr(st);
                 break;
             case 5:
                 exit(1);
@@ -210,7 +210,7 @@ void arrayMenu() {
 }
 
 // Linked list menu
-void llMenu() {
+void menuSLi() {
     int choice, val;
     node top = NULL;
 
@@ -228,20 +228,20 @@ void llMenu() {
             case 1:
                 printf("\nEnter the number to be pushed on stack >> ");
                 scanf("%d", &val);
-                top = pushLi(top, val);
+                top = pushSLi(top, val);
                 break;
             case 2:
-                top = popLi(top);
+                top = popSLi(top);
                 break;
             case 3:
-                val = peekLi(top);
+                val = peekSLi(top);
                 if (val != -1) {
                     printf("\nThe top most element is: %d", val);
                 }
                 break;
             case 4:
                 printf("\nCurrent Stack is\n");
-                displayLi(top);
+                displaySLi(top);
                 break;
             case 5:
                 exit(1);
@@ -268,11 +268,11 @@ void main() {
         switch (choice) {
             case 1:
                 printf("\nCreating STACK Using Array...\n");
-                arrayMenu();
+                menuSAr();
                 break;
             case 2:
                 printf("\nCreating STACK Using Linked List...\n");
-                llMenu();
+                menuSLi();
                 break;
             case 3:
                 exit(1);
