@@ -182,6 +182,7 @@ void displayQLi(queue q) {
 
 // Menu functions
 
+// menu for array
 void menuQAr() {
     int MAX;
     int val, choice;
@@ -264,6 +265,39 @@ void menuQLi() {
                 display(que);
                 break;
             case 5:
+                exit(1);
+            
+            default:
+                printf("\nWrong choice!!!\n");
+                break;
+        }
+    }
+}
+
+
+// main function
+void main() {
+    int choice;
+    while (1) {
+        printf("\n===============\n");
+        prinf("Press 1: Create QUEUE using Array.\n");
+        prinf("Press 2: Create QUEUE using Linked List.\n");
+        prinf("Press 3: Exit");
+        printf("\n===============\n");
+
+        printf("\nEnter your choice >> ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("\nCreating QUEUE using Array...\n\n");
+                menuQAr();
+                break;
+            case 2:
+                printf("\nCreating QUEUE using Linked List...\n\n");
+                menuQLi();
+                break;
+            case 3:
                 exit(1);
             
             default:
