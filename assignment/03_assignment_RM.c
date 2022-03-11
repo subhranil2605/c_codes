@@ -26,6 +26,7 @@ node displayList(node p) {
             printf("NULL\n");
             break;
         }
+        p = p -> next;
     }
 }
 
