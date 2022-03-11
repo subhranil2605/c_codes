@@ -45,22 +45,22 @@ node insert(node head, int coef, int exp) {
         return head;
     } else  {
         if (coef == 0) {
-            printf("\nCoef is 0, so new node is created!!\n")
+            printf("\nCoef is 0, so new node is created!!\n");
         } else {
             if (head == NULL || head -> exp < exp) {
                 newNode -> next = head;
                 head = newNode;
             } else if (head -> exp == exp) {
-                printf("\n%d Degree is already present!\n", exp);
+                printf("\n%d Degree is already present! So, the new node is updated!!!\n", exp);
                 head -> coef = head -> coef + coef;
                 free(newNode);
                 return head;
             } else {
                 p = head;
                 while (p -> next != NULL && p -> next -> exp > exp) {
-                    if (p -> next -> exp = exp) {
+                    if (p -> next -> exp == exp) {
                         printf("\n%d Degree is already present!\n", exp);
-                        head -> coef = head -> coef + coef;
+                        p -> next -> coef = p -> next -> coef + coef;
                         free(newNode);
                         return head;
                     }
