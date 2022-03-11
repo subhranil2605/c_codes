@@ -15,6 +15,7 @@ node createNode();
 node insert(node head, int coef, int exp);
 node createPolynomial();
 void displayPoly(node);
+node polyAdd(node poly1, node poly2);
 
 
 // create a single node
@@ -35,22 +36,39 @@ node insert(node head, int coef, int exp) {
     node newNode;
     node p;
     newNode = createNode();
+
     newNode -> coef = coef;
     newNode -> exp = exp;
 
     if (newNode == NULL) {
         printf("\nMemory Allocation Failed...\n");
+        return head;
     } else  {
-        if (head == NULL || head -> exp < exp) {
-            newNode -> next = head;
-            head = newNode;
+        if (coef == 0) {
+            printf("\nCoef is 0, so new node is created!!\n")
         } else {
-            p = head;
-            while (p -> next != NULL) {
-                p = p -> next;
+            if (head == NULL || head -> exp < exp) {
+                newNode -> next = head;
+                head = newNode;
+            } else if (head -> exp == exp) {
+                printf("\n%d Degree is already present!\n", exp);
+                head -> coef = head -> coef + coef;
+                free(newNode);
+                return head;
+            } else {
+                p = head;
+                while (p -> next != NULL && p -> next -> exp > exp) {
+                    if (p -> next -> exp = exp) {
+                        printf("\n%d Degree is already present!\n", exp);
+                        head -> coef = head -> coef + coef;
+                        free(newNode);
+                        return head;
+                    }
+                    p = p -> next;
+                }
+                newNode -> next = p -> next;
+                p -> next = newNode;
             }
-            newNode -> next = p -> next;
-            p -> next = newNode;
         }
     }
     return head;
@@ -81,7 +99,13 @@ node createPolynomial() {
 void displayPoly(node p) {
     while (1) {
         if (p != NULL) {
-            printf("%d x^%d --> ", p -> coef, p -> exp);
+            if (p -> exp == 1) {
+                printf("%dx --> ", p -> coef);
+            } else if (p -> exp == 0) {
+                printf("%d --> ", p -> coef);
+            } else {
+                printf("%dx^%d --> ", p -> coef, p -> exp);    
+            }
         } else {
             printf("NULL\n");
             break;
@@ -91,9 +115,53 @@ void displayPoly(node p) {
 }
 
 
+// polynomial addition
+node polyAdd(node poly1, node poly2) {
+    node p1 = poly1;
+    node p2 = poly2;
+    node result = NULL;
+
+    while (p1 != NULL && p2 != NULL) {
+        if (p1 -> exp == p2 -> exp) {
+            result = insert(result, p1 -> coef + p2 -> coef, p1 -> exp);
+            p1 = p1 -> next;
+            p2 = p2 -> next;
+        } else if (p1 -> exp > p2 -> exp) {
+            result = insert(result, p1 -> coef, p1 -> exp);
+            p1 = p1 -> next;
+        } else {
+            result = insert(result, p2 -> coef, p2 -> exp);
+            p2 = p2 -> next;
+        }
+    }
+
+    while (p1 != NULL) {
+        result = insert(result, p1 -> coef, p1 -> exp);
+        p1 = p1 -> next;
+    }
+
+    while (p2 != NULL) {
+        result = insert(result, p2 -> coef, p2 -> exp);
+        p2 = p2 -> next;
+    }
+
+    return result;
+}
+
+
 // main function
 void main() {
-    node poly;
-    poly = createPolynomial();
-    displayPoly(poly);
+    node poly1, poly2, r;
+
+    poly1 = createPolynomial();
+    displayPoly(poly1);
+
+    poly2 = createPolynomial();
+    displayPoly(poly2);
+
+    displayPoly(poly1);
+    displayPoly(poly2);
+
+    r = polyAdd(poly1, poly2);
+    displayPoly(r);
 }
