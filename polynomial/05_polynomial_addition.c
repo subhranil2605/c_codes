@@ -59,7 +59,7 @@ node insert(node head, int coef, int exp) {
                 p = head;
                 while (p -> next != NULL && p -> next -> exp >= exp) {
                     if (p -> next -> exp == exp) {
-                        printf("\n%d Degree is already present! So, the new node is updated!!!\n", exp);
+                        // printf("\n%d Degree is already present! So, the new node is updated!!!\n", exp);
                         p -> next -> coef = p -> next -> coef + coef;
                         free(newNode);
                         return head;
