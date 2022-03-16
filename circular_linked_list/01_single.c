@@ -1,6 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
-
 
 struct node {
     int data;
@@ -10,29 +8,26 @@ struct node {
 typedef struct node* node;
 
 
-
+// main function
 void main() {
-    node last;
-    node one = NULL;
-    node two = NULL;
-    node three = NULL;
-    
-    // Allocate memory
-    one = (node) malloc(sizeof(node));
+    node first, two, three, last;
+
+    first = NULL;
+    two = NULL;
+    three = NULL;
+
+    // Allocating memory
+    first = (node) malloc(sizeof(node));
     two = (node) malloc(sizeof(node));
     three = (node) malloc(sizeof(node));
 
-    // Adding value
-    one -> data = 1;
+    first -> data = 1;
     two -> data = 2;
     three -> data = 3;
 
-    // connect nodes
-    one -> next = two;
+    first -> next = two;
     two -> next = three;
     three -> next = one;
 
-    // saver address of the last node in third
     last = three;
-    
 }
