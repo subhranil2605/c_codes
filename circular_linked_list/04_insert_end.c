@@ -22,6 +22,18 @@ node createNode() {
 }
 
 
+// adding element to a empty list
+node creatingSingleElementList(node last, node newNode) {
+    if (last != NULL) {
+        return last;
+    } else {
+        last = newNode;
+        newNode -> next = last;
+        return last;
+    }
+}
+
+
 // insert at the end
 node insertEnd(node last) {
     node newNode;
@@ -34,8 +46,7 @@ node insertEnd(node last) {
     newNode -> data = data;
 
     if (last == NULL) {
-        last = newNode;
-        newNode -> next = last;
+        last = creatingSingleElementList(last, newNode);
     } else {
         newNode -> next = last -> next;     // links between new last and the first node
         last -> next = newNode;             // new node is the current last node

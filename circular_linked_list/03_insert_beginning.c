@@ -21,6 +21,17 @@ node createNode() {
     }
 }
 
+// adding element to a empty list
+node creatingSingleElementList(node last, node newNode) {
+    if (last != NULL) {
+        return last;
+    } else {
+        last = newNode;
+        newNode -> next = last;
+        return last;
+    }
+}
+
 
 // insert beginning
 node insertBeg(node last) {
@@ -34,8 +45,7 @@ node insertBeg(node last) {
     newNode -> data = data;
 
     if (last == NULL) {
-        last = newNode;
-        newNode -> next = last;
+        last = creatingSingleElementList(last, newNode);
     } else {
         newNode -> next = last -> next;
         last -> next = newNode;
