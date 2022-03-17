@@ -22,13 +22,13 @@ node createNode() {
 }
 
 
-// insert beginning
-node insertBeg(node last) {
+// insert at the end
+node insertEnd(node last) {
     node newNode;
     int data;
 
     newNode = createNode();
-    printf("Enter the data to be inserted (from the start) >> ");
+    printf("Enter the data to be inserted (from the end) >> ");
     scanf("%d", &data);
 
     newNode -> data = data;
@@ -37,8 +37,9 @@ node insertBeg(node last) {
         last = newNode;
         newNode -> next = last;
     } else {
-        newNode -> next = last -> next;
-        last -> next = newNode;
+        newNode -> next = last -> next;     // links between new last and the first node
+        last -> next = newNode;             // new node is the current last node
+        last = newNode;                     // set the last pointer to the new node
     }
     return last;    
 }
@@ -51,7 +52,7 @@ node createList() {
     last = NULL;
 
     while (ch != 'q') {
-        last = insertBeg(last);
+        last = insertEnd(last);
         printf("\nPress 'q' to stop OR Press anyting to continue >> ");
         scanf("\n%c", &ch);
     }
