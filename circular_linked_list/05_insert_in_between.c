@@ -68,6 +68,8 @@ node insertAfter(node last) {
         scanf("%d", &data);
         newNode = createNode();
         newNode -> data = data;
+
+        
         p = last -> next;
 
         do {
