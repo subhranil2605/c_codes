@@ -75,13 +75,16 @@ void display(node last) {
 
 
 // deleting from the start
-node deleteItem(node last, int data) {
+node deleteItem(node last) {
     node p, deletedItem; 
+    int data;
 
     // if list is empty
     if (last == NULL) {
         printf("The list is empty");
     } else {
+        printf("Enter the data to be deleted >> ");
+        scanf("%d", &data);
         // list consists of a single node
         if (last -> data == data && last -> next == last) {
             free(last);
@@ -125,7 +128,7 @@ void main() {
     printf("The list is: \t");
     display(last);
 
-    last = deleteItem(last, 4);
+    last = deleteItem(last);
     display(last);
 
 }

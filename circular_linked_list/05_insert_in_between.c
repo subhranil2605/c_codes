@@ -54,46 +54,37 @@ node insertEnd(node last, int data) {
 
 
 // insert after a specific item
-node insertAfter(node last, int data) {
+node insertAfter(node last) {
     node newNode, p;
-    int item;
-
+    int data, item;
+    
     if (last == NULL) {
-        printf("The list is empty!!!\n");
+        printf("The list is empty");
+        return last;
     } else {
+        printf("Enter the item after which new data to be inserted >> ");
+        scanf("%d", &item);
+        printf("Enter the data to be inserted >> ");
+        scanf("%d", &data);
         newNode = createNode();
         newNode -> data = data;
+        p = last -> next;
 
-        printf("Enter the element after which new data is to be inserted >> ");
-        scanf("%d", &item);
+        do {
+            if (p -> data == item) {
+                newNode -> next = p -> next;
+                p -> next = newNode;
 
-        node p = last -> next;  // it points to the head of the list
-    
-        while (1) {
-            if (p != last) {
-                if (p -> data == item) {
-                    newNode -> next = p -> next;
-                    p -> next = newNode;
-                } else {
-                    printf("%d is not in the list!!!", item);
-                }
-            } else {
-                if (p -> data == item) {
-                    newNode -> next = p -> next;
-                    p -> next = newNode;
+                if (p == last) {
                     last = newNode;
-                } else {
-                    printf("%d is not in the list!!!", item);
                 }
-                break;
+                return last;
             }
             p = p -> next;
-        }
-        
+        } while (p != last -> next);
+        return last;
     }
-    return last;
 }
-
 
 
 
@@ -125,6 +116,6 @@ void main() {
     printf("The list is: \t");
     display(last);
 
-    last = insertAfter(last, 6);
+    last = insertAfter(last);
     display(last);
 }
