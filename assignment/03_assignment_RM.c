@@ -17,8 +17,18 @@ node createNode();
 node insertEnd(node);
 node createList();
 void swap(int* a, int* b);
+
+node deleteBeg(node);
+node deleteEnd(node);
+node deletePos(node);
+
 node sortAsc(node);
 node sortDesc(node);
+
+node reverse(node);
+
+node concat(node, node);
+
 
 // menus
 node menuDelete(node);
@@ -105,6 +115,84 @@ void swap(int* a, int* b) {
     *a = *a - *b;
 }
 
+//-------------- Delete functions
+
+// delete at the beginning
+node deleteBeg(node head) {
+    node temp = NULL;
+    if (head == NULL) {
+        printf("\nList is empty!\n");
+        return 0;
+    } else {
+        temp = head;
+        head = head -> next;
+        printf("\nThe deleted element is: %d\n", temp -> data);
+    }
+    return head;
+}
+
+// delete at the end
+node deleteEnd(node head) {
+    node p, q;
+    int temp;
+    if (head == NULL) {
+        printf("\nList is empty!\n");
+        return 0;
+    } else if (head -> next == NULL) {
+        p = head;
+        head = NULL;
+        temp = p -> data;
+    } else {
+        q = head;
+        p = head -> next;
+        while (p -> next != NULL) {
+            q = p;
+            p = p -> next;
+        }
+        q -> next = NULL;
+        temp = p -> data;
+    }
+    printf("\nDeleted element is: %d\n", temp);
+    return head;
+}
+
+// delete at any position
+node deletePos(node head) {
+    node ptr, preptr;
+    int temp, pos, i;
+
+    printf("\nEnter the position of the node to delete(starting from 0):: ");
+    scanf("%d", &pos);
+
+    if (head == NULL) {
+        printf("\nList is empty!\n");
+        return 0;
+    } else {
+        if (pos == 0) {
+            temp = head -> data;
+            head = head -> next;
+        } else {
+            preptr = head;
+            ptr = head;
+            for (i = 0; i < pos; i++) {
+                preptr = ptr;
+                ptr = ptr -> next;
+                if (ptr == NULL) {
+                    printf("\nIncorrect position! Indexing out of range.\n");
+                    return head;
+                }
+            }
+            temp = ptr -> data;
+            preptr -> next = ptr -> next;
+        }
+    }
+    printf("\nDeleted element is: %d\n", temp);
+    return head;
+}
+
+
+//-------------- ---------------------------
+
 
 // ascending sorting
 node sortAsc(node head) {
@@ -144,6 +232,42 @@ node sortDesc(node head) {
 }
 
 
+// reversing
+node reverse(node head) {
+    node preptr = NULL, ptr, temp = NULL;
+
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    } else{
+        ptr = head;
+        while (ptr != NULL) {
+            temp = ptr -> next;
+            ptr -> next = preptr;
+            preptr = ptr;
+            ptr = temp;
+        }
+        return preptr;
+    }
+}
+
+// merging
+node concat(node a, node b) {
+    node p;
+    if (a == NULL) {
+        return b;
+    } 
+    if (b == NULL){
+        return a;
+    } 
+    p = a;
+    while (a -> next != NULL) {
+        a = a -> next;
+    }
+    a -> next = b;
+    return p;
+}
+
+
 /* ------------- Menu Fucntions ------------- */ 
 
 // delete menu
@@ -166,21 +290,54 @@ node menuDelete(node head) {
     switch (choice) {
         case 1:
             printf("\nDeleting from the beginning...\n");
+            printf("\nThe current list is\n");
+            display(head);
+            head = deleteBeg(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 2:
             printf("\nDeleting from the end...\n");
+            printf("\nThe current list is\n");
+            display(head);
+            head = deleteEnd(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 3:
             printf("\nDeleting from specific position...\n");
+            printf("\nThe current list is\n");
+            display(head);
+            head = deletePos(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 4:
             printf("\nDeleting after a node...\n");
+            printf("\nDeleting from specific position...\n");
+            printf("\nThe current list is\n");
+            display(head);
+            // head = deletePos(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 5:
             printf("\nDeleting before a node...\n");
+            printf("\nDeleting from specific position...\n");
+            printf("\nThe current list is\n");
+            display(head);
+            // head = deletePos(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 6:
             printf("\nDeleting a specific node...\n");
+            printf("\nDeleting from specific position...\n");
+            printf("\nThe current list is\n");
+            display(head);
+            // head = deletePos(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 7:
             exit(1);
@@ -245,6 +402,8 @@ node menuSort(node head) {
 // main menu
 node menuMain(node head) {
     int choice;
+    node list2;
+    list2 = NULL;
     
     while (1) {
         printf("\n==================================\n");
@@ -273,9 +432,29 @@ node menuMain(node head) {
                 break;
             case 4:
                 printf("\nReversing...\n");
+
+                printf("Current list is: \n");
+                display(head);
+
+                head = reverse(head);
+
+                printf("\nAfter Reversing the list is: \n");
+                display(head);
                 break;
             case 5:
-                printf("\nMerging..\n.");
+                printf("\nMerging...\n");
+                printf("\n\nCreating another list....\n");
+                list2 = createList(list2);
+
+                printf("\nThe first list is\n");
+                display(head);
+
+                printf("\nThe second list is\n");
+                display(list2);
+
+                head = concat(head, list2);
+                printf("\nAfter Merging them together the list is\n");
+                display(head);
                 break;
             case 6:
                 exit(1);

@@ -75,7 +75,7 @@ node createList() {
 
 
 // delete at any position
-node deleteAny(node head) {
+node deletePos(node head) {
     node ptr, preptr;
     int temp, pos, i;
 
@@ -114,5 +114,5 @@ void main() {
     node list = NULL;
     list = createList();
     printList(list);
-    list = deleteAny(list);
+    list = deletePos(list);
 }
