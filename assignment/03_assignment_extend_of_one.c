@@ -1,3 +1,10 @@
+/* ------------ Assignment 3 ------------ */ 
+/* ------------ Subhranil Sarkar ------------ */ 
+/* ------------ M.Sc. Data Science 1st Semester ------------ */ 
+/* ------------ University of Kalyani ------------ */ 
+/* ------------ 20th March, 2022 ------------ */ 
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
