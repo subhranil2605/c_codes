@@ -21,6 +21,7 @@ void swap(int* a, int* b);
 node deleteBeg(node);
 node deleteEnd(node);
 node deletePos(node);
+node deleteNode(node);
 
 node sortAsc(node);
 node sortDesc(node);
@@ -191,6 +192,38 @@ node deletePos(node head) {
 }
 
 
+// delete a specific node
+node deleteNode(node head) {
+    node current, prev;
+    int item;
+
+    printf("Enter the element you want to delete >> ");
+    scanf("%d", &item);
+
+    if (head == NULL) {
+        printf("The list is empty!!!\n");
+    } else {
+        if (head -> data == item) {
+            head = head -> next;
+        } else {
+            current = head;
+            while (current -> data != item) {
+                prev = current;
+                current = current -> next;
+
+                if (current == NULL) {
+                    printf("Not in the list\n");
+                    return head;
+                } 
+            }
+            prev -> next = current -> next;
+
+        }
+    }
+    return head;
+}
+
+
 //-------------- ---------------------------
 
 
@@ -335,7 +368,7 @@ node menuDelete(node head) {
             printf("\nDeleting from specific position...\n");
             printf("\nThe current list is\n");
             display(head);
-            // head = deletePos(head);
+            head = deleteNode(head);
             printf("\nAfter deleting the list is\n");
             display(head);
             break;
