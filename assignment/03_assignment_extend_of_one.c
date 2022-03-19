@@ -21,6 +21,8 @@ void swap(int* a, int* b);
 node deleteBeg(node);
 node deleteEnd(node);
 node deletePos(node);
+node deleteAfter(node);
+node deleteBefore(node);
 node deleteNode(node);
 
 node sortAsc(node);
@@ -192,6 +194,82 @@ node deletePos(node head) {
 }
 
 
+
+// delete after a node
+node deleteAfter(node head) {
+    node current, next;
+    int item;
+
+    printf("Enter the element after which you want to delete >> ");
+    scanf("%d", &item);
+
+    if (head == NULL) {
+        printf("The list is empty!!!\n");
+    } else {
+        if (head -> data == item) {
+            printf("The deleted element is: %d", head -> next -> data);
+            head -> next = head -> next -> next;
+            return head;
+        } else {
+            current = head;
+            while (current -> data != item) {
+                current = current -> next;
+                next = current -> next;
+
+                if (current -> next == NULL) {
+                    printf("Not in the list OR the last item\n");
+                    return head;
+                } 
+
+            }
+            printf("The deleted element is: %d\n", next -> data);
+            current -> next = next -> next;
+        }
+    }
+    return head;
+}
+
+
+// delete before a node
+node deleteBefore(node head) {
+    node current, prev;
+    int item;
+
+    printf("Enter the element before which you want to delete >> ");
+    scanf("%d", &item);
+
+    if (head == NULL) {
+        printf("The list is empty!!!\n");
+    } else {
+        if (head -> data == item) {
+            printf("There's no data before this item!!!\n");
+            return head;
+        } else if (head -> next -> data == item) {
+            printf("The deleted element is: %d\n", head -> data);
+            head = head -> next;
+            return head;
+        } else {
+            current = head;
+            while (current -> next -> data != item) {
+                prev = current;
+                current = current -> next;
+
+                if (current -> next == NULL) {
+                    printf("Not in the list\n");
+                    return head;
+                } 
+
+            }
+            printf("The deleted element is: %d\n", current -> data);
+            prev -> next = current -> next;
+
+        }
+    }
+    return head;
+}
+
+
+
 // delete a specific node
 node deleteNode(node head) {
     node current, prev;
@@ -347,28 +425,25 @@ node menuDelete(node head) {
             break;
         case 4:
             printf("\nDeleting after a node...\n");
-            printf("\nDeleting from specific position...\n");
             printf("\nThe current list is\n");
             display(head);
-            // head = deletePos(head);
+            head = deleteAfter(head);
             printf("\nAfter deleting the list is\n");
             display(head);
             break;
         case 5:
             printf("\nDeleting before a node...\n");
-            printf("\nDeleting from specific position...\n");
             printf("\nThe current list is\n");
             display(head);
-            // head = deletePos(head);
+            head = deleteBefore(head);
             printf("\nAfter deleting the list is\n");
             display(head);
             break;
         case 6:
             printf("\nDeleting a specific node...\n");
-            printf("\nDeleting from specific position...\n");
             printf("\nThe current list is\n");
             display(head);
-            head = deleteNode(head);
+            head = deleteNode(head); 
             printf("\nAfter deleting the list is\n");
             display(head);
             break;
@@ -439,7 +514,7 @@ node menuMain(node head) {
     list2 = NULL;
     
     while (1) {
-        printf("\n==================================\n");
+        printf("\n=============== Main Menu ===============\n");
         printf("Press 1: DISPLAY\n");
         printf("Press 2: DELETE\n");
         printf("Press 3: SORT\n");
@@ -513,6 +588,7 @@ void main() {
     list = NULL;
 
     // creating a list for doing the operations on it
+    printf("\nCreating a list...\n\n");
     list = createList(list);
 
     printf("\nThe Created List is\n");

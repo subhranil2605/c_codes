@@ -48,8 +48,8 @@ node insertBeg(node head, int value) {
 }
 
 
-// delete a specific node
-node deleteNode(node head) {
+// delete before a node
+node deleteBefore(node head) {
     node current, prev;
     int item;
 
@@ -60,20 +60,25 @@ node deleteNode(node head) {
         printf("The list is empty!!!\n");
     } else {
         if (head -> data == item) {
+            printf("There's no data before this item!!!\n");
+            return head;
+        } else if (head -> next -> data == item) {
+            printf("The deleted element is: %d\n", head -> data);
             head = head -> next;
+            return head;
         } else {
             current = head;
-            while (current -> data != item) {
+            while (current -> next -> data != item) {
                 prev = current;
                 current = current -> next;
 
-                if (current == NULL) {
+                if (current -> next == NULL) {
                     printf("Not in the list\n");
                     return head;
                 } 
+
             }
-            printf("%d\n", prev -> data);
-            printf("%d\n", current -> data);
+            printf("The deleted element is: %d\n", current -> data);
             prev -> next = current -> next;
 
         }

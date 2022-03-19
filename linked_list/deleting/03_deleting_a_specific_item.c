@@ -93,7 +93,7 @@ void main() {
     list = insertBeg(list, 555);
     printList(list);
 
-    list = deleteBefore(list);
+    list = deleteNode(list);
     printList(list);
 
 }
