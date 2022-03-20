@@ -1,8 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int top = -1;
-
 
 // doubly node structure
 struct node {
@@ -31,14 +29,14 @@ node createNode() {
 
 
 // display
-void display(node head) {
-    if (head == NULL) {
+void display(node top) {
+    if (top == NULL) {
         printf("\nThe Stack is empty!!!\n");
     } else {
         printf("NULL");
-        while (head != NULL) {
-            printf("<--%d-->", head -> data);
-            head = head -> next;
+        while (top != NULL) {
+            printf("<--%d-->", top -> data);
+            top = top -> next;
         }
         printf("NULL");
     }
@@ -47,7 +45,7 @@ void display(node head) {
 
 
 // PUSH operation
-node push(node head) {
+node push(node top) {
     int val;
     node newNode;
 
@@ -56,16 +54,42 @@ node push(node head) {
     scanf("%d", &val);
     newNode -> data = val;
 
-    if (head == NULL) {
-        head = newNode;
+    if (top == NULL) {
+        top = newNode;
     } else {
-        newNode -> next = head;
-        head -> prev = newNode;
-        head = newNode;
+        newNode -> next = top;
+        top -> prev = newNode;
+        top = newNode;
     }
-    return head;
+    return top;
 }
 
+
+// POP operation
+node pop(node top) {
+    node ptr;
+    ptr = top;
+    
+    if (top == NULL) {
+        printf("The STACK is empty!!!");
+    } else {
+        top = top -> next;
+        if (top != NULL) {
+            top -> prev = NULL;
+        }
+        printf("\nThe deleted item is: %d\n", ptr -> data);
+        free(ptr);
+    }
+    return top;
+}
+
+
+// Peek operation
+void peek(node top){
+    (top == NULL) 
+       ? printf("\nThe STACK is empty\n")
+       : printf("\nThe topmost element is: %d\n", top -> data); 
+}
 
 
 
@@ -81,4 +105,11 @@ void main() {
     stack = push(stack);
 
     display(stack);
+
+    // stack = pop(stack);
+    // stack = pop(stack);
+    // display(stack);
+
+    peek(stack);
+
 }

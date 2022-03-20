@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int top = -1;
+// int top = -1;
 
 // node structure
 struct node {
