@@ -2,7 +2,7 @@
 
 
 void main() {
-    int i, n, search, flag = 0, count = 0;
+    int i, n, search, flag = 0, pos = 0;
 
     printf("Enter number of elements in the array: ");
     scanf("%d", &n);
@@ -18,11 +18,13 @@ void main() {
     scanf("%d", &search);
 
     for (i = 0; i < n; i++) {
-        (a[i] == search) ? flag = 1 : flag = 0;
-        count++;
+        if (a[i] == search) {
+            flag = 1;
+            pos = i;
+        } 
     } 
 
     (flag == 1) 
-    ? printf("The element is in the array at %d\n", count) 
-    : printf("The element is not in the array!\n")
+    ? printf("The element %d is in the array at %d\n", search, pos) 
+    : printf("The element %d is not in the array!\n", search);
 }
