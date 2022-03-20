@@ -9,8 +9,9 @@ void main() {
 
     int a[n];
 
-    printf("\nEnter the elements\n");
+    printf("\nEnter the %d elements\n", n);
     for (i = 0; i < n; i++) {
+        printf("%d-th element is: ");
         scanf("%d", &a[i]);
     }
 
