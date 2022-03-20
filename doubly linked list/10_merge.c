@@ -65,14 +65,49 @@ node insertEnd(node head) {
     return head;
 }
 
+// concat
+node concat(node a, node b) {
+    node p;
+    if (a == NULL) {
+        return b;
+    } 
+    if (b == NULL){
+        return a;
+    } 
+    p = a;
+    while (a -> next != NULL) {
+        a = a -> next;
+    }
+    b -> prev = a;
+    a -> next = b;
+    return p;
+}
+
+
 
 
 void main() {
-    node list = NULL;
+    node list1, list2 ;
 
-    list = insertEnd(list);
-    list = insertEnd(list);
-    list = insertEnd(list);   
+    list1 = NULL;
+    list2 = NULL;
 
-    display(list);
+    list1 = insertEnd(list1);
+    list1 = insertEnd(list1);
+    list1 = insertEnd(list1);   
+
+    display(list1);
+
+    printf("\n\nAnother list\n");
+    list2 = insertEnd(list2);
+    list2 = insertEnd(list2);
+    list2 = insertEnd(list2);   
+
+    display(list2);
+
+
+    printf("\n\nAfter merging\n");
+    
+    list1 = concat(list1, list2);
+    display(list1);
 }
