@@ -21,18 +21,27 @@ typedef struct node* node;
 /* ------------ Function prototypes ------------ */ 
 
 node createNode();
+void swap(int* a, int* b);
 void display(node );
 node insertBeg(node );
 node createListBeg();
 node insertEnd(node);
 node createListEnd();
 node insertPos(node); 
+node deleteBeg(node);
+node deleteEnd(node);
+node deletePos(node);
+node sortAsc(node);
+node sortDesc(node);
+node reverse(node);
+node concat(node, node);
 
 // menus
 node menuInsert(node);
 node menuDelete(node);
 node menuSort(node);
 node menuMain(node);
+node menuCreateList(node);
 
 
 /* ------------ Function declarations ------------ */ 
@@ -49,6 +58,14 @@ node createNode() {
         return temp;
     }
 }
+
+// swap
+void swap(int* a, int* b) {
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
 
 
 // displaying 
@@ -141,7 +158,7 @@ node createListEnd() {
     head = NULL;
 
     while (ch != 'q') {
-        head = insertBeg(head);
+        head = insertEnd(head);
 
         printf("\nPress 'q' to stop OR Press anything to continue >> ");
         scanf("\n%c", &ch);
@@ -247,9 +264,6 @@ node deletePos(node head) {
     node current;
     int temp, pos, i;
 
-    printf("\nYour current list is : \n");
-    display(head);
-
     printf("\nEnter the position of the node to delete(starting from 0):: ");
     scanf("%d", &pos);
 
@@ -283,10 +297,90 @@ node deletePos(node head) {
         }
     }
     printf("\nDeleted element is: %d\n", temp);
-    display(head);
     return head;
 }
 
+
+// ascending sort
+node sortAsc(node head) {
+    node p, q;
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    }else {
+        for (p = head; p != NULL; p = p -> next) {
+            for (q = p -> next; q != NULL; q = q -> next) {
+                if (p -> data > q -> data) {
+                    swap(&p -> data, &q -> data);
+                }
+            }
+        }
+        return head;
+    }
+
+}
+
+
+// descending sort
+node sortDesc(node head) {
+    node p, q;
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    }else {
+        for (p = head; p != NULL; p = p -> next) {
+            for (q = p -> next; q != NULL; q = q -> next) {
+                if (p -> data < q -> data) {
+                    swap(&p -> data, &q -> data);
+                }
+            }
+        }
+        return head;
+    }
+
+}
+
+
+// reverse
+node reverse(node head) {
+    node p, q;
+
+    if (head == NULL) {
+        printf("\nThe list is empty.\n");
+    } else{
+        p = head;
+        q = NULL;
+        while (p != NULL) {
+            q = p -> prev;
+            p -> prev = p -> next;
+            p -> next = q;
+            p = p -> prev;
+        } 
+        if (q != NULL) {
+            head = q -> prev;       
+        } else {
+            printf("Only one item\n");
+        }
+    }
+    return head;
+}
+
+
+// concat
+node concat(node a, node b) {
+    node p;
+    if (a == NULL) {
+        return b;
+    } 
+    if (b == NULL){
+        return a;
+    } 
+    p = a;
+    while (a -> next != NULL) {
+        a = a -> next;
+    }
+    b -> prev = a;
+    a -> next = b;
+    return p;
+}
 
 
 
@@ -349,15 +443,27 @@ node menuDelete(node head) {
     switch (choice) {
         case 1:
             printf("\nDeleting from the beginning...\n");
+            printf("\nCurrent list is\n");
+            display(head);
             head = deleteBeg(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 2:
             printf("\nDeleting from the end...\n");
+            printf("\nCurrent list is\n");
+            display(head);
             head = deleteEnd(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 3:
             printf("\nDeleting from the specific position...\n");
+            printf("\nCurrent list is\n");
+            display(head);
             head = deletePos(head);
+            printf("\nAfter deleting the list is\n");
+            display(head);
             break;
         case 4:
             exit(1);
@@ -408,6 +514,41 @@ node menuSort(node head) {
         default:
             printf("\nIncorrect choice!!!\n");
             head = menuSort(head);
+            break;
+    }
+
+
+    return head;
+}
+
+
+node menuCreateList(node head) {
+    int choice;
+
+    printf("\n=============== Create List ===============\n");
+    printf("Press 1: Inserting from the beginning\n");
+    printf("Press 2: Inserting fromt the end\n");
+    printf("Press 3: Exit\n");
+    printf("\n==================================\n");
+    printf("Enter your choice >> ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("\nCreating list with inserting from the front...\n");
+            head = createListBeg(head);
+            break;
+        case 2:
+            printf("\nCreating list with inserting from the end...\n");
+            head = createListEnd(head);
+            break;
+        case 3:
+            exit(1);
+            break;
+        
+        default:
+            printf("\nIncorrect choice!!!\n");
+            head = menuCreateList(head);
             break;
     }
 
@@ -468,7 +609,7 @@ node menuMain(node head) {
             case 6:
                 printf("\nMerging...\n");
                 printf("\n\nCreating another list....\n");
-                list2 = createList(list2);
+                list2 = menuCreateList(list2);
 
                 printf("\nThe first list is\n");
                 display(head);
@@ -499,5 +640,14 @@ node menuMain(node head) {
 void main() {
     node list; 
     list = NULL;
+
+    printf("\nCreating a list for the operations.\n\n");
+
+    list = menuCreateList(list);
+
+    printf("\nThe list is\n");
+    display(list);
+
+    list = menuMain(list);
 
 }
