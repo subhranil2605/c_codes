@@ -34,6 +34,18 @@ struct queue {
 typedef struct queue* queue;
 
 
+/* ------------- Function Prototypes ------------- */ 
+
+
+queue createQueue();
+void display(queue); 
+queue enQueue(queue); 
+queue deQueue(queue);
+void peek(queue);
+queue mainMenu(queue);
+
+
+/* ------------- Functions ------------- */ 
 
 // create a node
 node createNode() {
