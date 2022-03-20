@@ -143,7 +143,7 @@ queue mainMenu(queue q) {
     int choice;
 
     while (1) {
-        printf("\n=============================\n");
+        printf("\n============ Queue Using Circular Linked List ==============\n");
         printf("Press 1: Enqueue\n");
         printf("Press 2: Dequeue\n");
         printf("Press 3: Peek\n");
