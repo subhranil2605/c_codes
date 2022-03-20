@@ -119,12 +119,12 @@ node mainMenu(node stack) {
     int choice;
 
     while (1) {
-        printf("\n============ Queue Using Doubly Linked List ==============\n");
+        printf("\n============ Stack Using Doubly Linked List ==============\n");
         printf("Press 1: PUSH\n");
         printf("Press 2: POP\n");
         printf("Press 3: Peek\n");
         printf("Press 4: Display\n");
-        printf("Press 5: Exit\n");
+        printf("Press 5: Exit");
         printf("\n=============================\n");
         printf("Enter your choice >> ");
         scanf("%d", &choice);
@@ -134,7 +134,7 @@ node mainMenu(node stack) {
                 printf("\nInserting into the Stack...\n");
                 printf("\nThe current stack is\n");
                 display(stack);
-                stack = enQueue(stack);
+                stack = push(stack);
                 printf("\nThe stack is now\n");
                 display(stack);
                 break;
@@ -142,7 +142,7 @@ node mainMenu(node stack) {
                 printf("\nDeleting from the Stack...\n");
                 printf("\nThe current stack is\n");
                 display(stack);
-                stack = deQueue(stack);
+                stack = pop(stack);
                 printf("\nThe stack is now\n");
                 display(stack);
                 break;

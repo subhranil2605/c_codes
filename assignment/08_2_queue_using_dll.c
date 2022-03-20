@@ -131,7 +131,7 @@ queue mainMenu(queue q) {
         printf("Press 2: Dequeue\n");
         printf("Press 3: Peek\n");
         printf("Press 4: Display\n");
-        printf("Press 5: Exit\n");
+        printf("Press 5: Exit");
         printf("\n=============================\n");
         printf("Enter your choice >> ");
         scanf("%d", &choice);
