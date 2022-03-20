@@ -65,7 +65,7 @@ node insertEnd(node head) {
     return head;
 }
 
-
+// deleting from the front
 node deleteBeg(node head) {
     node p;
     int deletedItem;
