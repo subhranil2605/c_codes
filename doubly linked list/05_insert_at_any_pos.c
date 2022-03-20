@@ -70,7 +70,7 @@ node insertEnd(node head) {
 // insert any
 node insertPos(node head) {
     int choice, i, value;
-    node current, prev, newNode;
+    node current, newNode;
 
     printf("\nYour current list is : \n");
     display(head);
@@ -91,7 +91,6 @@ node insertPos(node head) {
     } else {          
         current = head;
         for (i = 0; i < choice; i++) {
-            prev = current;
             current = current -> next;
 
             if (current == NULL) {
@@ -99,8 +98,8 @@ node insertPos(node head) {
                 return head;
             }
         }
-        prev -> next = newNode;         // previous node's next node is the new node
-        newNode -> prev = prev;         // new node's previous is the prev node
+        current -> prev -> next = newNode;         // previous node's next node is the new node
+        newNode -> prev = current -> prev;         // new node's previous is the prev node
         newNode -> next = current;      // new node's next node is the current node
         current -> prev = newNode;      // new node's previous node is the newnode
     }
