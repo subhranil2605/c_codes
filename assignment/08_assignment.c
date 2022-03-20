@@ -1,7 +1,21 @@
+/*  Assignment 8 
+    Queue using circular linked List
+*/ 
+
+
+/* ------------ Subhranil Sarkar ------------ */ 
+/* ------------ M.Sc. Data Science 1st Semester ------------ */ 
+/* ------------ University of Kalyani ------------ */ 
+/* ------------ 20th March, 2022 ------------ */ 
+
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
 
+
+// node
 struct node {
     int data;
     struct node* next;
@@ -17,6 +31,24 @@ struct queue {
 };
 
 typedef struct queue* queue;
+
+
+
+/* ------------- function prototypes ------------- */ 
+
+
+node createNode();
+queue createQueue(); 
+queue enQueue(queue);
+queue deQueue(queue);
+void peek(queue);
+void display(queue);
+queue mainMenu(queue); 
+
+
+/* ------------- function declarations ------------- */ 
+
+
 
 
 
@@ -47,8 +79,6 @@ queue createQueue() {
 queue enQueue(queue q) {
     node newNode;
     int value;
-
-    // value = 5;
     
     newNode = createNode();
     printf("Enter the data to be inserted >> ");
@@ -72,8 +102,10 @@ queue deQueue(queue q) {
     if (q -> front == NULL && q -> rear == NULL) {
         printf("The queue is empty!!!");
     } else if (q -> front == q -> rear){
+        printf("\nThe deleted element is: %d\n", q -> front -> data);
         q -> front = q -> rear = NULL;
     } else {
+        printf("\nThe deleted element is: %d\n", q -> front -> data);
         q -> front = q -> front -> next;
         q -> rear -> next = q -> front;
     }
@@ -106,19 +138,67 @@ void display(queue q) {
 
 
 
+/* ------------- Menus ------------- */ 
+queue mainMenu(queue q) {
+    int choice;
+
+    while (1) {
+        printf("\n=============================\n");
+        printf("Press 1: Enqueue\n");
+        printf("Press 2: Dequeue\n");
+        printf("Press 3: Peek\n");
+        printf("Press 4: Display\n");
+        printf("Press 5: Exit\n");
+        printf("\n=============================\n");
+        printf("Enter your choice >> ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("\nInserting into the Queue...\n");
+                printf("\nThe current queue is\n");
+                display(q);
+                q = enQueue(q);
+                printf("\nThe queue is now\n");
+                display(q);
+                break;
+            case 2:
+                printf("\nDeleting from the Queue...\n");
+                printf("\nThe current queue is\n");
+                display(q);
+                q = deQueue(q);
+                printf("\nThe queue is now\n");
+                display(q);
+                break;
+            case 3:
+                printf("\nPeeking...\n");
+                peek(q);
+                break;
+            case 4:
+                printf("\nDisplaying...\n");
+                display(q);
+                break;
+            case 5:
+                exit(1);
+            
+            default:
+                printf("\nIncorrect choice!!!\n");
+                break;
+        }
+    }
+
+    return q;
+} 
+
+
+
+/* ------------- Main function ------------- */ 
+
 void main() {
     queue que;
 
     que = NULL;
     que = createQueue();
 
-    que = enQueue(que);
-    que = enQueue(que);
-    que = enQueue(que);
-
-    display(que);
-
-    // que = deQueue(que);
-
-    peek(que);
+    que = mainMenu(que);
 }
