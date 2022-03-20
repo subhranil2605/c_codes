@@ -22,7 +22,7 @@ node createNode() {
 }
 
 
-// adding element to a empty list
+// adding element to an empty list
 node creatingSingleElementList(node last, node newNode) {
     if (last != NULL) {
         return last;
