@@ -43,7 +43,7 @@ void selectionSort(int arr[], int n) {
 
 // main function
 void main() {
-    int i, j, n, swapped = 0;
+    int i, j, n;
     printf("Enter the number of elements in the array: ");
     scanf("%d", &n);
 
