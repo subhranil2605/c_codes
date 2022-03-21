@@ -14,24 +14,24 @@ void swap(int *a, int *b) {
 }
 
 // display elements
-void displayArray(int arr[], int n) {
+void displayArray(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
+        printf("%d ", *(arr+i));
     }
     printf("\n");
 }
 
 
 // bubble sort
-void bubbleSort(int arr[], int n) {
+void bubbleSort(int *arr, int n) {
     int i, j;
     int swapped = 0; // 0 -> false & 1 -> true
     for (i = 0; i < n - 1; i++) {
         swapped = 0;
         for (j = 0; j < n - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                swap(&arr[j], &arr[j + 1]);
+            if (*(arr + j) > *(arr + j + 1)) {
+                swap(arr + j, arr + j + 1);
                 swapped = 1; 
             }
         }
@@ -59,7 +59,7 @@ void main() {
     }
 
 
-    printf("Bubble Sort");
+    printf("Bubble Sort ");
 
     bubbleSort(a, n);
     displayArray(a, n);
