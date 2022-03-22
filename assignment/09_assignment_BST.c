@@ -6,7 +6,6 @@
 
 
 
-
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -24,9 +23,15 @@ typedef struct node* node;
 /* ------------ Function prototypes ------------ */ 
 
 node createNode(int );
-node insert(node );
+node insert(node , int);
 node minValueElement(node );
-node delete(node );
+node delete(node , int);
+node search(node , int );
+void inorder(node );
+void preorder(node );
+void postorder(node );
+
+
 
 /* ------------ Function declarations ------------ */ 
 
@@ -41,11 +46,7 @@ node createNode(int val) {
 
 
 // inserting a node in the tree
-node insert(node tree) {
-    int val;
-
-    printf("Enter the data to be inserted >> ");
-    scanf("%d", &val);
+node insert(node tree, int val) {
 
     if (tree == NULL) {
         tree = createNode(val);
@@ -76,12 +77,8 @@ node minValueElement(node tree) {
 
 
 // delete
-node delete(node tree) {
+node delete(node tree, int val) {
     node temp;
-    int val;
-
-    printf("Enter the data to be deleted >> ");
-    scanf("%d", &val);
 
     if (tree == NULL) {
         return tree;
@@ -105,29 +102,20 @@ node delete(node tree) {
         temp = minValueElement(tree -> right);
 
         tree -> data = temp -> data;
-
         tree -> right = delete(tree -> right, temp -> data);
     }
     return tree;
 }
 
-
 // search
-node search(node tree) {
-    int val;
-    node p;
-
-    printf("Enter the data to be searched >> ");
-    scanf("%d", &val);
-
-    p = tree;
-    if (p == NULL || p -> data == val) {
-        return p;
+node search(node tree, int val) {
+    if (tree == NULL || tree -> data == val) {
+        return tree;
     } else {
-        if (val < p -> data) {
-            p = search(tree -> left, val);
+        if (val < tree -> data) {
+            tree = search(tree -> left, val);
         } else {
-            p = search(tree -> right, val);
+            tree = search(tree -> right, val);
         }
     }
     
@@ -207,8 +195,8 @@ node menuTraversal(node tree) {
 
 
 // main menu
-node mainMenu(node tree) {
-    int choice;
+node menuMain(node tree) {
+    int choice, val;
     node temp;
 
     while (1) {
@@ -225,20 +213,30 @@ node mainMenu(node tree) {
         switch (choice) {
             case 1:
                 printf("\nInserting...\n");
-                tree = insert(tree);
+                printf("\nEnter the value to be inserted >> ");
+                scanf("%d", &val);
+                tree = insert(tree, val);
                 printf("Insertion Done!\n");
+                printf("The tree is: ");
+                inorder(tree);
                 break;
             case 2:
                 printf("\nDeleting...\n");
-                printf("Current tree is\n");
-                
-                tree = delete(tree);
+                printf("Current tree is: ");
+                inorder(tree);
+                printf("\nEnter the value to be deleted >> ");
+                scanf("%d", &val);
+                tree = delete(tree, val);
                 printf("After deleting the tree is\n");
-
+                inorder(tree);
                 break;
             case 3:
                 printf("\nSearching...\n");
-                temp = search(tree);
+
+                printf("\nEnter the value to be searched >> ");
+                scanf("%d", &val);
+
+                temp = search(tree, val);
 
                 if (temp == NULL) {
                     printf("The element is not in the list\n");
@@ -270,5 +268,5 @@ void main() {
     node tree;
     tree = NULL;
 
-
+    tree = menuMain(tree);
 }
